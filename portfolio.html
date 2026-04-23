@@ -1,0 +1,1285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nicholas Leger — Mechanical Engineering Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0f;
+    --bg2: #111118;
+    --bg3: #18181f;
+    --accent: #e8f0ff;
+    --accent2: #7b9fff;
+    --accent3: #4060d4;
+    --text: #e8eaf0;
+    --muted: #7a7d8a;
+    --border: rgba(255,255,255,0.07);
+    --border2: rgba(255,255,255,0.12);
+    --card-bg: #14141c;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Syne', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* GRID OVERLAY */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(123,159,255,0.025) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(123,159,255,0.025) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.2rem 3rem;
+    background: rgba(10,10,15,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: 'Space Mono', monospace;
+    font-size: 13px;
+    color: var(--accent2);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 13px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--text); }
+
+  /* HERO */
+  #hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 8rem 3rem 4rem;
+    position: relative;
+    z-index: 1;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .hero-eyebrow {
+    font-family: 'Space Mono', monospace;
+    font-size: 12px;
+    color: var(--accent2);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  .hero-eyebrow::before {
+    content: '';
+    display: block;
+    width: 40px;
+    height: 1px;
+    background: var(--accent2);
+  }
+  h1.hero-name {
+    font-size: clamp(3.5rem, 8vw, 7rem);
+    font-weight: 800;
+    line-height: 0.95;
+    letter-spacing: -0.03em;
+    color: var(--accent);
+    margin-bottom: 0.5rem;
+  }
+  .hero-title {
+    font-size: clamp(1.2rem, 3vw, 1.8rem);
+    font-weight: 400;
+    color: var(--muted);
+    margin-bottom: 2rem;
+    letter-spacing: -0.01em;
+  }
+  .hero-title span { color: var(--accent2); font-weight: 600; }
+  .hero-desc {
+    max-width: 600px;
+    font-size: 1.05rem;
+    color: var(--muted);
+    line-height: 1.8;
+    margin-bottom: 3rem;
+  }
+  .hero-ctas { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.85rem 1.8rem;
+    background: var(--accent3);
+    color: #fff;
+    font-family: 'Space Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+  }
+  .btn-primary:hover { background: var(--accent2); transform: translateY(-2px); }
+  .btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.85rem 1.8rem;
+    background: transparent;
+    color: var(--text);
+    font-family: 'Space Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: 1px solid var(--border2);
+    cursor: pointer;
+    transition: border-color 0.2s, color 0.2s, transform 0.2s;
+  }
+  .btn-ghost:hover { border-color: var(--accent2); color: var(--accent2); transform: translateY(-2px); }
+  .hero-stats {
+    display: flex;
+    gap: 3rem;
+    margin-top: 4rem;
+    padding-top: 3rem;
+    border-top: 1px solid var(--border);
+    flex-wrap: wrap;
+  }
+  .stat-num {
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: var(--accent);
+    display: block;
+    line-height: 1;
+    margin-bottom: 0.3rem;
+  }
+  .stat-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  /* SECTIONS */
+  section { position: relative; z-index: 1; }
+  .section-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 6rem 3rem;
+  }
+  .section-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    color: var(--accent2);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  .section-label::before {
+    content: '';
+    display: block;
+    width: 30px;
+    height: 1px;
+    background: var(--accent2);
+  }
+  h2.section-title {
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 800;
+    color: var(--accent);
+    letter-spacing: -0.03em;
+    margin-bottom: 3rem;
+    line-height: 1.1;
+  }
+
+  /* SKILLS */
+  #skills { background: var(--bg2); }
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+  .skill-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    padding: 1.5rem;
+    transition: border-color 0.25s, transform 0.25s;
+  }
+  .skill-card:hover {
+    border-color: var(--accent2);
+    transform: translateY(-4px);
+  }
+  .skill-icon {
+    width: 36px;
+    height: 36px;
+    background: rgba(64,96,212,0.15);
+    border: 1px solid rgba(64,96,212,0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+    font-size: 16px;
+  }
+  .skill-card h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--accent);
+    margin-bottom: 0.75rem;
+    letter-spacing: -0.01em;
+  }
+  .skill-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+  .tag {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    padding: 3px 8px;
+    background: rgba(123,159,255,0.08);
+    border: 1px solid rgba(123,159,255,0.15);
+    color: var(--accent2);
+    letter-spacing: 0.05em;
+  }
+
+  /* EXPERIENCE */
+  #experience {}
+  .exp-list { display: flex; flex-direction: column; gap: 2px; }
+  .exp-item {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    overflow: hidden;
+    transition: border-color 0.25s;
+  }
+  .exp-item:hover { border-color: var(--border2); }
+  .exp-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.5rem 2rem;
+    cursor: pointer;
+    gap: 1rem;
+  }
+  .exp-header:hover .exp-arrow { color: var(--accent2); }
+  .exp-left { display: flex; flex-direction: column; gap: 0.3rem; }
+  .exp-company {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--accent);
+    letter-spacing: -0.01em;
+  }
+  .exp-role {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    color: var(--accent2);
+    letter-spacing: 0.06em;
+  }
+  .exp-right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.3rem;
+    flex-shrink: 0;
+  }
+  .exp-date {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.05em;
+  }
+  .exp-arrow {
+    font-size: 18px;
+    color: var(--muted);
+    transition: transform 0.3s, color 0.2s;
+    flex-shrink: 0;
+  }
+  .exp-arrow.open { transform: rotate(180deg); }
+  .exp-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease;
+  }
+  .exp-body.open { max-height: 600px; }
+  .exp-body-inner {
+    padding: 0 2rem 2rem;
+    border-top: 1px solid var(--border);
+    padding-top: 1.5rem;
+  }
+  .exp-bullets { list-style: none; display: flex; flex-direction: column; gap: 0.7rem; }
+  .exp-bullets li {
+    font-size: 0.95rem;
+    color: var(--muted);
+    padding-left: 1.4rem;
+    position: relative;
+    line-height: 1.6;
+  }
+  .exp-bullets li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: var(--accent2);
+    font-family: 'Space Mono', monospace;
+  }
+  .exp-photos {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 8px;
+    margin-top: 1.2rem;
+  }
+  .exp-photos img {
+    width: 100%;
+    aspect-ratio: 4/3;
+    object-fit: cover;
+    border: 1px solid var(--border);
+    filter: grayscale(20%);
+    transition: filter 0.3s, transform 0.3s;
+  }
+  .exp-photos img:hover {
+    filter: grayscale(0%);
+    transform: scale(1.02);
+  }
+
+  /* PROJECTS */
+  #projects { background: var(--bg2); }
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 1.5rem;
+  }
+  .project-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: border-color 0.25s, transform 0.25s;
+  }
+  .project-card:hover {
+    border-color: var(--accent2);
+    transform: translateY(-5px);
+  }
+  .project-thumb {
+    width: 100%;
+    aspect-ratio: 16/10;
+    object-fit: cover;
+    display: block;
+    filter: grayscale(30%) brightness(0.85);
+    transition: filter 0.3s;
+  }
+  .project-card:hover .project-thumb {
+    filter: grayscale(0%) brightness(1);
+  }
+  .project-thumb-placeholder {
+    width: 100%;
+    aspect-ratio: 16/10;
+    background: var(--bg3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid var(--border);
+  }
+  .project-thumb-placeholder svg {
+    opacity: 0.15;
+    width: 48px;
+    height: 48px;
+  }
+  .project-content { padding: 1.5rem; flex: 1; display: flex; flex-direction: column; }
+  .project-tag {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    color: var(--accent2);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 0.6rem;
+  }
+  .project-card h3 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 0.6rem;
+    letter-spacing: -0.01em;
+    line-height: 1.3;
+  }
+  .project-card p {
+    font-size: 0.9rem;
+    color: var(--muted);
+    line-height: 1.7;
+    flex: 1;
+    margin-bottom: 1rem;
+  }
+  .project-skills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-bottom: 1rem;
+  }
+  .project-detail-toggle {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    color: var(--accent2);
+    background: none;
+    border: 1px solid rgba(123,159,255,0.25);
+    padding: 6px 12px;
+    cursor: pointer;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    align-self: flex-start;
+    transition: background 0.2s, border-color 0.2s;
+  }
+  .project-detail-toggle:hover {
+    background: rgba(123,159,255,0.08);
+    border-color: var(--accent2);
+  }
+  .project-expanded {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease;
+    border-top: 0 solid var(--border);
+  }
+  .project-expanded.open {
+    max-height: 1000px;
+    border-top: 1px solid var(--border);
+    margin-top: 1rem;
+    padding-top: 1rem;
+  }
+  .project-expanded img {
+    width: 100%;
+    height: auto;
+    border: 1px solid var(--border);
+    margin-bottom: 0.75rem;
+    display: block;
+  }
+  .project-expanded p { margin-bottom: 0.5rem; }
+
+  /* VIDEO PLACEHOLDER */
+  .video-placeholder {
+    background: var(--bg3);
+    border: 1px dashed var(--border2);
+    aspect-ratio: 16/9;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 1rem;
+    cursor: pointer;
+    transition: border-color 0.2s;
+    width: 100%;
+    margin: 0.75rem 0;
+  }
+  .video-placeholder:hover { border-color: var(--accent2); }
+  .video-placeholder .vp-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    text-align: center;
+    letter-spacing: 0.06em;
+  }
+  .video-placeholder .vp-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1.5px solid var(--border2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* RESUME */
+  #resume {}
+  .resume-container {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    padding: 3rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+  }
+  @media (max-width: 700px) {
+    .resume-container { grid-template-columns: 1fr; }
+  }
+  .resume-section h3 {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    color: var(--accent2);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .resume-edu {
+    margin-bottom: 1.5rem;
+  }
+  .resume-edu h4 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 0.2rem;
+  }
+  .resume-edu p {
+    font-size: 0.88rem;
+    color: var(--muted);
+  }
+  .resume-edu .gpa {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    color: var(--accent2);
+    margin-top: 0.3rem;
+  }
+  .soft-skills { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+  .soft-skills li {
+    font-size: 0.9rem;
+    color: var(--muted);
+    padding-left: 1.2rem;
+    position: relative;
+  }
+  .soft-skills li::before {
+    content: '▸';
+    position: absolute;
+    left: 0;
+    color: var(--accent3);
+    font-size: 11px;
+  }
+  .resume-download {
+    margin-top: 2.5rem;
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  /* CONTACT */
+  #contact { background: var(--bg2); }
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: start;
+  }
+  @media (max-width: 700px) { .contact-grid { grid-template-columns: 1fr; } }
+  .contact-text h3 {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 1rem;
+    letter-spacing: -0.01em;
+  }
+  .contact-text p {
+    color: var(--muted);
+    font-size: 0.95rem;
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+  }
+  .contact-links { display: flex; flex-direction: column; gap: 0.75rem; }
+  .contact-link {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    text-decoration: none;
+    padding: 1rem 1.5rem;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    transition: border-color 0.2s, transform 0.2s;
+    color: var(--text);
+  }
+  .contact-link:hover {
+    border-color: var(--accent2);
+    transform: translateX(4px);
+    color: var(--accent2);
+  }
+  .contact-link-icon {
+    font-family: 'Space Mono', monospace;
+    font-size: 12px;
+    color: var(--accent2);
+    min-width: 20px;
+  }
+  .contact-link-label {
+    font-size: 0.9rem;
+  }
+  .contact-form { display: flex; flex-direction: column; gap: 1rem; }
+  .contact-form input,
+  .contact-form textarea {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    color: var(--text);
+    font-family: 'Syne', sans-serif;
+    font-size: 14px;
+    padding: 0.85rem 1rem;
+    outline: none;
+    transition: border-color 0.2s;
+    resize: vertical;
+  }
+  .contact-form input:focus,
+  .contact-form textarea:focus { border-color: var(--accent2); }
+  .contact-form input::placeholder,
+  .contact-form textarea::placeholder { color: var(--muted); }
+  .contact-form textarea { min-height: 120px; }
+
+  /* FOOTER */
+  footer {
+    padding: 2rem 3rem;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    position: relative;
+    z-index: 1;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  footer p {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.06em;
+  }
+
+  /* ANIMATIONS */
+  .fade-in { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .fade-in.visible { opacity: 1; transform: translateY(0); }
+  .fade-in-delay-1 { transition-delay: 0.1s; }
+  .fade-in-delay-2 { transition-delay: 0.2s; }
+  .fade-in-delay-3 { transition-delay: 0.3s; }
+
+  /* DIVIDER */
+  .divider {
+    height: 1px;
+    background: var(--border);
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { gap: 1.5rem; }
+    .section-inner { padding: 4rem 1.5rem; }
+    #hero { padding: 7rem 1.5rem 3rem; }
+    .hero-stats { gap: 2rem; }
+    .resume-container { padding: 1.5rem; }
+  }
+
+  /* HIGHLIGHT CHIP */
+  .highlight-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: rgba(64,96,212,0.15);
+    border: 1px solid rgba(64,96,212,0.35);
+    padding: 4px 10px;
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    color: var(--accent2);
+    letter-spacing: 0.08em;
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <span class="nav-logo">N.Leger // ME Portfolio</span>
+  <ul class="nav-links">
+    <li><a href="#hero">Home</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#resume">Resume</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div id="hero">
+  <p class="hero-eyebrow fade-in">Mechanical Engineering Portfolio</p>
+  <h1 class="hero-name fade-in fade-in-delay-1">Nicholas<br>Leger</h1>
+  <p class="hero-title fade-in fade-in-delay-2">
+    University of Florida · B.S. Mechanical Engineering ·
+    <span>Targeting Build Engineering @ SpaceX</span>
+  </p>
+  <p class="hero-desc fade-in fade-in-delay-3">
+    Hands-on mechanical engineer with 4 internships in product design, manufacturing, and quality engineering. Passionate about high-performance hardware, precision manufacturing, and building things that actually fly.
+  </p>
+  <div class="hero-ctas fade-in fade-in-delay-3">
+    <a class="btn-primary" href="#projects">View Projects →</a>
+    <a class="btn-ghost" href="#resume">Resume</a>
+  </div>
+  <div class="hero-stats fade-in">
+    <div>
+      <span class="stat-num">4</span>
+      <span class="stat-label">Engineering Internships</span>
+    </div>
+    <div>
+      <span class="stat-num">3.44</span>
+      <span class="stat-label">Cumulative GPA</span>
+    </div>
+    <div>
+      <span class="stat-num">$800K+</span>
+      <span class="stat-label">Annual Savings Delivered</span>
+    </div>
+    <div>
+      <span class="stat-num">Dec '26</span>
+      <span class="stat-label">Graduation</span>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-inner">
+    <p class="section-label fade-in">01 / Capabilities</p>
+    <h2 class="section-title fade-in">Technical Skills</h2>
+    <div class="skills-grid">
+      <div class="skill-card fade-in">
+        <div class="skill-icon">⚙</div>
+        <h3>CAD & Design</h3>
+        <div class="skill-tags">
+          <span class="tag">SolidWorks (certified)</span>
+          <span class="tag">Creo Parametric</span>
+          <span class="tag">Fusion 360</span>
+          <span class="tag">GD&T</span>
+          <span class="tag">Technical Drawing</span>
+          <span class="tag">DFM</span>
+        </div>
+      </div>
+      <div class="skill-card fade-in fade-in-delay-1">
+        <div class="skill-icon">🔬</div>
+        <h3>Analysis & Simulation</h3>
+        <div class="skill-tags">
+          <span class="tag">FEA / Abaqus</span>
+          <span class="tag">SolidWorks Simulation</span>
+          <span class="tag">MATLAB</span>
+          <span class="tag">Structural Analysis</span>
+          <span class="tag">FMEA</span>
+          <span class="tag">Ansys Granta</span>
+        </div>
+      </div>
+      <div class="skill-card fade-in fade-in-delay-2">
+        <div class="skill-icon">🏭</div>
+        <h3>Manufacturing</h3>
+        <div class="skill-tags">
+          <span class="tag">Tooling Design</span>
+          <span class="tag">Lean Manufacturing</span>
+          <span class="tag">CNC</span>
+          <span class="tag">Carbon Fiber Layup</span>
+          <span class="tag">3D Printing (FDM)</span>
+          <span class="tag">Welding</span>
+          <span class="tag">Waterjet</span>
+        </div>
+      </div>
+      <div class="skill-card fade-in fade-in-delay-3">
+        <div class="skill-icon">💡</div>
+        <h3>Electronics & Controls</h3>
+        <div class="skill-tags">
+          <span class="tag">Arduino</span>
+          <span class="tag">LabVIEW</span>
+          <span class="tag">Circuit Design</span>
+          <span class="tag">CVML Cameras</span>
+          <span class="tag">Sensor Integration</span>
+          <span class="tag">Motor Control</span>
+        </div>
+      </div>
+      <div class="skill-card fade-in">
+        <div class="skill-icon">📋</div>
+        <h3>Systems & Process</h3>
+        <div class="skill-tags">
+          <span class="tag">Root Cause Analysis</span>
+          <span class="tag">MES</span>
+          <span class="tag">Preventive Maintenance</span>
+          <span class="tag">Asset Optimization</span>
+          <span class="tag">P&ID</span>
+          <span class="tag">Quality Engineering</span>
+        </div>
+      </div>
+      <div class="skill-card fade-in fade-in-delay-1">
+        <div class="skill-icon">🚀</div>
+        <h3>Space Systems</h3>
+        <div class="skill-tags">
+          <span class="tag">CubeSat Design Spec</span>
+          <span class="tag">LEO Environment</span>
+          <span class="tag">Material Selection</span>
+          <span class="tag">Thermal Analysis</span>
+          <span class="tag">Tether Dynamics</span>
+          <span class="tag">Launch Load Analysis</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-inner">
+    <p class="section-label fade-in">02 / Background</p>
+    <h2 class="section-title fade-in">Work Experience</h2>
+    <div class="exp-list">
+
+      <!-- FDOT -->
+      <div class="exp-item fade-in">
+        <div class="exp-header" onclick="toggleExp(this)">
+          <div class="exp-left">
+            <span class="exp-company">Florida Department of Transportation</span>
+            <span class="exp-role">Accelerated Pavement Testing Research Assistant</span>
+          </div>
+          <div class="exp-right">
+            <span class="exp-date">Mar 2025 – Present</span>
+          </div>
+          <span class="exp-arrow">↓</span>
+        </div>
+        <div class="exp-body">
+          <div class="exp-body-inner">
+            <ul class="exp-bullets">
+              <li>Operate and maintain a Heavy Vehicle Simulator (HVS), implementing preventive maintenance strategies that reduced downtime and maximized testing efficiency</li>
+              <li>Perform regular pavement deformation profiling using LabVIEW, delivering data to support evaluation of pavement materials</li>
+              <li>Led the design and integration of a UV data collection system, enhancing simulation capabilities for real-world analysis</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- John Deere Quality -->
+      <div class="exp-item fade-in fade-in-delay-1">
+        <div class="exp-header" onclick="toggleExp(this)">
+          <div class="exp-left">
+            <span class="exp-company">John Deere</span>
+            <span class="exp-role">Quality Engineering Intern · East Moline, IL</span>
+          </div>
+          <div class="exp-right">
+            <span class="exp-date">May – Aug 2025</span>
+          </div>
+          <span class="exp-arrow">↓</span>
+        </div>
+        <div class="exp-body">
+          <div class="exp-body-inner">
+            <ul class="exp-bullets">
+              <li>Installed and programmed CVML cameras on the production line to automate quality checks and mitigate downtime</li>
+              <li>Developed a 3D weld map to facilitate accurate quality-noting and improve quality conversation and resolution with operators</li>
+              <li>Designed tooling and the manufacturing process to greatly improve pulley alignment of the combine jackshaft pulley utilizing a laser system — saving over <strong style="color:var(--accent)">$90,000</strong> in direct warranty claims</li>
+              <li>Covered quality issues for a zone of the main combine assembly line ensuring fast and efficient resolutions</li>
+              <li>Led quality communication at production meetings and discussed solutions with leadership to prevent future failures</li>
+            </ul>
+            <div class="exp-photos">
+              <img src="1000108044.jpg" alt="John Deere quality work" loading="lazy">
+              <img src="1000108043.jpg" alt="John Deere production line" loading="lazy">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- John Deere Mfg -->
+      <div class="exp-item fade-in fade-in-delay-2">
+        <div class="exp-header" onclick="toggleExp(this)">
+          <div class="exp-left">
+            <span class="exp-company">John Deere</span>
+            <span class="exp-role">Manufacturing Engineering Intern · Augusta, GA</span>
+          </div>
+          <div class="exp-right">
+            <span class="exp-date">May – Aug 2024</span>
+          </div>
+          <span class="exp-arrow">↓</span>
+        </div>
+        <div class="exp-body">
+          <div class="exp-body-inner">
+            <ul class="exp-bullets">
+              <li>Led factory fuel-fill reduction initiative — implementing process improvements generating over <strong style="color:var(--accent)">$96,000 annual savings</strong></li>
+              <li>Designed and fabricated custom tooling to improve factory production efficiency and mitigate safety risks using DFM principles</li>
+              <li>Engineered and prototyped a deluxe rear hoist system achieving an estimated <strong style="color:var(--accent)">$720,000 annual cost reduction</strong></li>
+              <li>Provided on-call production line support applying root cause analysis to minimize downtime</li>
+              <li>Directed standard time element audit refining asset utilization in alignment with Lean Manufacturing principles</li>
+            </ul>
+            <div class="exp-photos">
+              <img src="1000091553.jpg" alt="Manufacturing tooling" loading="lazy">
+              <img src="1000091565.jpg" alt="John Deere manufacturing" loading="lazy">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- John Deere Product Design -->
+      <div class="exp-item fade-in">
+        <div class="exp-header" onclick="toggleExp(this)">
+          <div class="exp-left">
+            <span class="exp-company">John Deere</span>
+            <span class="exp-role">Product Design Engineering Intern · Augusta, GA</span>
+          </div>
+          <div class="exp-right">
+            <span class="exp-date">Aug – Dec 2023</span>
+          </div>
+          <span class="exp-arrow">↓</span>
+        </div>
+        <div class="exp-body">
+          <div class="exp-body-inner">
+            <ul class="exp-bullets">
+              <li>Designed, prototyped, and finalized drawings for 3 tractor add-on kits using GD&T principles, expected to net over <strong style="color:var(--accent)">$200,000/year</strong></li>
+              <li>Developed improved factory creep-setting process, reducing post-maintenance costs by over <strong style="color:var(--accent)">50%</strong></li>
+              <li>Designed and collaborated with suppliers to expedite production of a hydraulic pipe spacer for the next model year</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Savannah River -->
+      <div class="exp-item fade-in fade-in-delay-1">
+        <div class="exp-header" onclick="toggleExp(this)">
+          <div class="exp-left">
+            <span class="exp-company">Savannah River Mission Completion (US DOE)</span>
+            <span class="exp-role">Systems Engineering Intern · Aiken, SC</span>
+          </div>
+          <div class="exp-right">
+            <span class="exp-date">May – Aug 2023</span>
+          </div>
+          <span class="exp-arrow">↓</span>
+        </div>
+        <div class="exp-body">
+          <div class="exp-body-inner">
+            <ul class="exp-bullets">
+              <li>Translated complex vendor diagrams into detailed 3D SolidWorks models, improving system integration and documentation</li>
+              <li>Updated and optimized Piping & Instrumentation Diagrams using MicroStation, ensuring compliance with engineering standards</li>
+              <li>Prepared and processed Design Change Forms in SmartSketch to implement engineering improvements in mechanical systems</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-inner">
+    <p class="section-label fade-in">03 / Work</p>
+    <h2 class="section-title fade-in">Engineering Projects</h2>
+    <div class="projects-grid">
+
+      <!-- Capstone -->
+      <div class="project-card fade-in">
+        <img class="project-thumb" src="IMG_20251121_163626_heic.webp" alt="Talon Tether prototype">
+        <div class="project-content">
+          <p class="project-tag">Capstone · EML4501 · Fall 2025</p>
+          <h3>Talon Tether — CubeSat Tether Deployment System</h3>
+          <p>Compact tether deployment & charge-management system for two 12U SmallSats. Fits in 3U+1U CubeSat volume; deploys 50–150 m of Aluminum 5056-H18 conductive wire to generate artificial lunar/Martian gravity (0.166–0.38 g) in LEO.</p>
+          <div class="project-skills">
+            <span class="tag">SolidWorks CAD</span>
+            <span class="tag">FEA / FOS Analysis</span>
+            <span class="tag">Materials Selection</span>
+            <span class="tag">3D Prototyping</span>
+            <span class="tag">Stepper Motor Control</span>
+          </div>
+          <button class="project-detail-toggle" onclick="toggleProject(this)">Details ↓</button>
+          <div class="project-expanded">
+            <p style="font-size:0.9rem;color:var(--muted);margin-bottom:0.75rem;">I led design analysis: tether wire storage capacity, artificial gravity calculations, material selection via Ansys Granta, motor torque FOS (2.48), tether tension analysis (FOS 7.59), and level wind thread pitch. Our prototype confirmed structural soundness of the dual-satellite reel + level-wind system.</p>
+            <img src="IMG_20251121_163626_heic.webp" alt="Talon Tether final prototype">
+            <p style="font-size:0.85rem;color:var(--muted);">3D-printed prototype · FDM custom parts + OTS hardware · Aluminum 5056-H18 tether wire</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- UF Solar Gators -->
+      <div class="project-card fade-in fade-in-delay-1">
+        <img class="project-thumb" src="20221231_145935.jpg" alt="Carbon fiber solar car body">
+        <div class="project-content">
+          <p class="project-tag">Extracurricular · UF Solar Gators · 2022–2024</p>
+          <h3>Solar Car Aero Body — Carbon Fiber Fabrication</h3>
+          <p>Aero Body Design Coordinator for University of Florida's solar racing team. Led carbon fiber wet layup fabrication to minimize weight and aerodynamic drag, and designed safety-critical body and canopy latches for rider protection.</p>
+          <div class="project-skills">
+            <span class="tag">Carbon Fiber Layup</span>
+            <span class="tag">SolidWorks Simulation</span>
+            <span class="tag">DFM</span>
+            <span class="tag">Structural Analysis</span>
+          </div>
+          <button class="project-detail-toggle" onclick="toggleProject(this)">Details ↓</button>
+          <div class="project-expanded">
+            <img src="20221106_134705.jpg" alt="Carbon fiber wet layup process">
+            <p style="font-size:0.9rem;color:var(--muted);margin-bottom:0.75rem;">Performed carbon fiber wet layups on large mold forms. Designed safety-critical body latches and conducted SolidWorks structural simulations of the steel chassis under load for data-driven design decisions.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- CAD Design 2022 -->
+      <div class="project-card fade-in fade-in-delay-2">
+        <img class="project-thumb" src="20210412_152345.jpg" alt="CAD design project">
+        <div class="project-content">
+          <p class="project-tag">Coursework · CAD Design · 2022</p>
+          <h3>Mechanical CAD Design Projects</h3>
+          <p>Comprehensive SolidWorks CAD coursework covering part modeling, assemblies, and engineering drawings with GD&T. Built foundational skills in parametric design that underpin all subsequent engineering work.</p>
+          <div class="project-skills">
+            <span class="tag">SolidWorks</span>
+            <span class="tag">GD&T</span>
+            <span class="tag">Engineering Drawings</span>
+            <span class="tag">Assemblies</span>
+          </div>
+          <button class="project-detail-toggle" onclick="toggleProject(this)">Details ↓</button>
+          <div class="project-expanded">
+            <p style="font-size:0.9rem;color:var(--muted);">Achieved SolidWorks certification through this coursework. Projects included fully-constrained parametric part models, multi-component assembly modeling with proper mate constraints, and detailed drawings conforming to ASME Y14.5 GD&T standards.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Circuits -->
+      <div class="project-card fade-in">
+        <div class="project-thumb-placeholder">
+          <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="8" y="8" width="32" height="32" rx="2" stroke="white" stroke-width="2"/>
+            <path d="M16 24h4M28 24h4M20 16v4M20 28v4" stroke="white" stroke-width="2" stroke-linecap="round"/>
+            <circle cx="24" cy="24" r="4" stroke="white" stroke-width="2"/>
+          </svg>
+        </div>
+        <div class="project-content">
+          <p class="project-tag">Coursework · Circuits · 2025</p>
+          <h3>Circuits & Electronics Engineering</h3>
+          <p>Hands-on circuits coursework covering analog and digital circuit design, sensor integration, PCB fundamentals, and Arduino-based control systems — directly applicable to avionics and sensor-rich systems.</p>
+          <div class="project-skills">
+            <span class="tag">Circuit Design</span>
+            <span class="tag">Arduino</span>
+            <span class="tag">Sensor Integration</span>
+            <span class="tag">PCB Fundamentals</span>
+            <span class="tag">LabVIEW</span>
+          </div>
+          <button class="project-detail-toggle" onclick="toggleProject(this)">Details ↓</button>
+          <div class="project-expanded">
+            <p style="font-size:0.9rem;color:var(--muted);">Covered op-amp circuits, signal conditioning, ADC/DAC systems, and microcontroller programming. Projects included sensor-based data acquisition systems and closed-loop motor control — skills directly transferable to test equipment and flight hardware systems.</p>
+            <div class="video-placeholder" onclick="alert('Add video embed here')">
+              <div class="vp-icon">▶</div>
+              <span class="vp-label">Add circuit demo video here</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- DML Food Slicer -->
+      <div class="project-card fade-in fade-in-delay-1">
+        <div class="project-thumb-placeholder">
+          <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 36L36 12M20 12h16v16" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="16" cy="32" r="6" stroke="white" stroke-width="2"/>
+          </svg>
+        </div>
+        <div class="project-content">
+          <p class="project-tag">Lab · Design for Manufacturing · DML</p>
+          <h3>Food Slicer — Design for Manufacturing Lab</h3>
+          <p>Full design-to-manufacture cycle for a food slicer product. Applied DFM principles to reduce part count, simplify assembly, and optimize for manufacturability — culminating in detailed manufacturing plans and cost models.</p>
+          <div class="project-skills">
+            <span class="tag">DFM</span>
+            <span class="tag">Manufacturing Process Planning</span>
+            <span class="tag">Cost Modeling</span>
+            <span class="tag">Assembly Design</span>
+            <span class="tag">Tolerancing</span>
+          </div>
+          <button class="project-detail-toggle" onclick="toggleProject(this)">Details ↓</button>
+          <div class="project-expanded">
+            <p style="font-size:0.9rem;color:var(--muted);">Applied Design for Manufacturing (DFM) and Design for Assembly (DFA) methodologies to redesign a consumer food slicer. Reduced part count, created detailed manufacturing process tables (similar to Talon Tether capstone), and developed comprehensive cost models — the same analytical toolkit needed for production hardware at scale.</p>
+            <div class="video-placeholder" onclick="alert('Add DML video here')">
+              <div class="vp-icon">▶</div>
+              <span class="vp-label">Add DML project demo video here</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- VEX / Robotics -->
+      <div class="project-card fade-in fade-in-delay-2">
+        <img class="project-thumb" src="Screenshot_20260422_131946.png" alt="VEX robotics competition robot">
+        <div class="project-content">
+          <p class="project-tag">Personal Project · Robotics</p>
+          <h3>VEX Robotics Competition Robot</h3>
+          <p>Designed and built a competitive VEX robotics robot featuring mecanum wheels for omnidirectional drive, multi-motor intake systems, and a linear actuator launch mechanism. Competed in regional competitions.</p>
+          <div class="project-skills">
+            <span class="tag">Mechanical Design</span>
+            <span class="tag">Mecanum Drive</span>
+            <span class="tag">Motor Integration</span>
+            <span class="tag">Competition Engineering</span>
+          </div>
+          <button class="project-detail-toggle" onclick="toggleProject(this)">Details ↓</button>
+          <div class="project-expanded">
+            <img src="Screenshot_20260422_131946.png" alt="VEX robot close-up">
+            <p style="font-size:0.9rem;color:var(--muted);">Iterative design and build process under competition constraints. Featured mecanum wheels for lateral motion, chain-driven intake, and a pneumatic/motorized launch system. This project developed hardware intuition for real-time mechanical debugging under pressure.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- RESUME -->
+<section id="resume">
+  <div class="section-inner">
+    <p class="section-label fade-in">04 / Background</p>
+    <h2 class="section-title fade-in">Resume & Education</h2>
+    <div class="resume-container fade-in">
+      <div class="resume-section">
+        <h3>Education</h3>
+        <div class="resume-edu">
+          <h4>University of Florida</h4>
+          <p>B.S. Mechanical Engineering<br>Minor in Engineering Innovation</p>
+          <p class="gpa">GPA: 3.44 · Expected Dec 2026</p>
+        </div>
+        <h3 style="margin-top:2rem;">Tools & Software</h3>
+        <div class="skill-tags" style="margin-top:1rem;">
+          <span class="tag">SolidWorks (certified)</span>
+          <span class="tag">Creo Parametric</span>
+          <span class="tag">Abaqus</span>
+          <span class="tag">Fusion 360</span>
+          <span class="tag">MATLAB</span>
+          <span class="tag">Arduino</span>
+          <span class="tag">LabVIEW</span>
+          <span class="tag">MicroStation</span>
+          <span class="tag">SmartSketch</span>
+          <span class="tag">Ansys Granta</span>
+        </div>
+      </div>
+      <div class="resume-section">
+        <h3>Engineering Focus</h3>
+        <ul class="soft-skills">
+          <li>Precision manufacturing & tooling design</li>
+          <li>Root cause analysis & quality engineering</li>
+          <li>Structural analysis & factor of safety validation</li>
+          <li>Design for manufacturing (DFM) & cost modeling</li>
+          <li>Lean manufacturing & process optimization</li>
+          <li>Electromechanical systems integration</li>
+          <li>Space-grade materials & LEO environment design</li>
+          <li>Rapid prototyping & iterative development</li>
+        </ul>
+        <div class="resume-download">
+          <a href="Nicholaslegerresume2026_1.pdf" class="btn-primary" download>Download Resume →</a>
+          <a href="Nicholaslegerresume2026_1.pdf" class="btn-ghost" target="_blank">View Full Screen</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-inner">
+    <p class="section-label fade-in">05 / Connect</p>
+    <h2 class="section-title fade-in">Get in Touch</h2>
+    <div class="contact-grid">
+      <div class="contact-text fade-in">
+        <h3>Targeting Build Engineering @ SpaceX Starship</h3>
+        <p>I'm a hands-on mechanical engineer who loves building things that push limits. From carbon fiber solar car bodies to satellite tether systems, I thrive at the intersection of design and manufacturing. Open to opportunities in launch vehicle build engineering, test hardware, and production systems.</p>
+        <div class="contact-links">
+          <a href="mailto:nicholasleger@ufl.edu" class="contact-link">
+            <span class="contact-link-icon">@</span>
+            <span class="contact-link-label">nicholasleger@ufl.edu</span>
+          </a>
+          <a href="tel:7272766355" class="contact-link">
+            <span class="contact-link-icon">✆</span>
+            <span class="contact-link-label">727-276-6355</span>
+          </a>
+          <a href="https://www.linkedin.com/in/nicholasleger" class="contact-link" target="_blank">
+            <span class="contact-link-icon">in</span>
+            <span class="contact-link-label">linkedin.com/in/nicholasleger</span>
+          </a>
+          <a href="Nicholaslegerresume2026_1.pdf" class="contact-link" download>
+            <span class="contact-link-icon">↓</span>
+            <span class="contact-link-label">Download Resume (PDF)</span>
+          </a>
+        </div>
+      </div>
+      <div class="fade-in fade-in-delay-1">
+        <form class="contact-form" onsubmit="handleContactForm(event)">
+          <input type="text" placeholder="Your name" id="cf-name" required>
+          <input type="email" placeholder="Your email" id="cf-email" required>
+          <input type="text" placeholder="Subject" id="cf-subject">
+          <textarea placeholder="Your message..." id="cf-message" required></textarea>
+          <button type="submit" class="btn-primary">Send Message →</button>
+          <p id="cf-status" style="font-family:'Space Mono',monospace;font-size:11px;color:var(--accent2);display:none;margin-top:0.5rem;"></p>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>Nicholas Leger · Mechanical Engineering Portfolio · University of Florida 2026</p>
+  <p>Built for <span style="color:var(--accent2)">SpaceX Starship Build Engineering</span></p>
+</footer>
+
+<script>
+function toggleExp(header) {
+  const arrow = header.querySelector('.exp-arrow');
+  const body = header.nextElementSibling;
+  const isOpen = body.classList.contains('open');
+  document.querySelectorAll('.exp-body.open').forEach(b => {
+    b.classList.remove('open');
+    b.previousElementSibling.querySelector('.exp-arrow').classList.remove('open');
+  });
+  if (!isOpen) {
+    body.classList.add('open');
+    arrow.classList.add('open');
+  }
+}
+
+function toggleProject(btn) {
+  const expanded = btn.nextElementSibling;
+  const isOpen = expanded.classList.contains('open');
+  expanded.classList.toggle('open', !isOpen);
+  btn.textContent = isOpen ? 'Details ↓' : 'Close ↑';
+}
+
+function handleContactForm(e) {
+  e.preventDefault();
+  const status = document.getElementById('cf-status');
+  status.style.display = 'block';
+  status.textContent = '→ Message sent! I\'ll get back to you soon.';
+  e.target.reset();
+}
+
+// Fade in observer
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>

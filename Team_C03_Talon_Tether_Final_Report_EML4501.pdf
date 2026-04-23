@@ -1,0 +1,2473 @@
+EML4501 Mechanical Engineering Design 2 | Group Project Report 
+Talon Tether 
+Group Number: 3
+Group Name: Birds of a Tether
+Submission Date: Fall 2025 December 3
+
+2 
+Group Member UF-ID #
+1 42297848
+2 38593934
+3 17865932
+4 63875111
+5 73650734
+6 68820253
+7 36584571
+8 76431145
+9 89593107
+
+3 
+Contents 
+CONTENTS ......................................................................................................................................... 3
+EXECUTIVE SUMMARY ........................................................................................................................ 5
+1 PROJECT MANAGEMENT .............................................................................................................. 7
+2 TECHNICAL BACKGROUND ........................................................................................................ 11
+3 DISCOVER PHASE: RESEARCH ................................................................................................... 12
+3.1 NEED STATEMENT ......................................................................................................................... 12
+3.2 5WH ANALYSIS ........................................................................................................................... 12
+3.3 USER RESEARCH .......................................................................................................................... 14
+3.4 PRODUCT AND PATENT BENCHMARKS ................................................................................................ 15
+3.5 KANO MODEL .............................................................................................................................. 17
+4 DEFINE PHASE: SPECIFICATIONS ............................................................................................... 18
+4.1 CUSTOMER NEEDS LIST ................................................................................................................. 18
+4.2 PRODUCT DESIGN SPECIFICATION (PDS) ........................................................................................... 19
+4.3 USE MODEL ................................................................................................................................ 20
+4.4 FUNCTION MODEL ........................................................................................................................ 21
+5 DEVELOP PHASE: IDEATION ....................................................................................................... 22
+5.1 ALTERNATIVE DESIGN CONCEPTS ..................................................................................................... 22 
+5.2 CONCEPT EVALUATION .................................................................................................................. 30
+6 DELIVER PHASE: FINAL DESIGN CONCEPT ................................................................................. 33
+6.1 PRODUCT ASSEMBLY AND SYSTEMS................................................................................................... 33 
+ 6.2 Bill of Materials………………………………………………………………………………………………………………..37 
+7 DELIVER PHASE: CONCEPT ANALYSIS ........................................................................................ 40
+7.1 DESIGN ANALYSIS......................................................................................................................... 40
+7.2 DESIGN PROTOTYPING ................................................................................................................... 51
+8 DELIVER PHASE: DESIGN FOR X ................................................................................................. 53
+8.1 DESIGN FOR RELIABILITY ................................................................................................................ 53
+8.2 DESIGN FOR ENVIRONMENTAL FACTORS ............................................................................................. 56 
+8.3 DESIGN FOR MAINTAINABILITY ......................................................................................................... 57
+8.4 DESIGN FOR ECONOMIC FACTORS .................................................................................................... 59
+8.5 ETHICAL CONSIDERATIONS ............................................................................................................. 60
+9 DELIVER PHASE: MANUFACTURING AND COST MODEL ............................................................... 61 
+9.1 MANUFACTURING PROCESS TABLES .................................................................................................. 61
+9.2 COST MODEL .............................................................................................................................. 70
+10 DISCUSSION AND CONCLUSION ............................................................................................ 74
+11 REFERENCES ......................................................................................................................... 75
+
+4 
+12 APPENDICES ......................................................................................................................... 77
+12.1 ASSEMBLY DRAWINGS ................................................................................................................ 77
+12.2 PART DRAWINGS....................................................................................................................... 91 
+12.3 FUNCTIONAL SURFACES ........................................................................................................... 103
+12.4 ELECTRICAL/WIRING DIAGRAMS ................................................................................................. 104
+
+5 
+Executive Summary 
+Operations in Low Earth Orbit (LEO) face persistent challenges related to spacecraft orientation, 
+microgravity disturbances, and the lack of standardized long-tether deployment systems. Maintaining stable 
+alignment between spacecraft is especially difficult without a mechanism capable of controlling tension, 
+dissipating static charge, and reliably deploying a long conductive tether. Current industry solutions do not 
+offer compact, CubeSat-sized architectures that can store, release, and monitor a tether while keeping the 
+system mechanically reliable and electrically grounded. This project addresses those gaps by developing an 
+integrated tether deployment system designed specifically for small satellite platforms. 
+The challenge defined by Summanus Aerospace is to design a compact tether system for two 12U 
+SmallSats, weighing 24 kg each, that allows them to rotate about their common center of mass to simulate 
+lunar (0.166 g) or Martian (0.38 g) gravity. To support such maneuvers, the system must deploy 50–150 meters 
+of tether wire, maintain controlled tension, dissipate electrostatic charge, and operate reliably for a minimum 
+of six months in the LEO thermal environment. All hardware must fit within a 2U or 3U volume, conform to the 
+CubeSat Design Specification, and integrate with standard 6061/7075 aluminum frames. 
+The Talon Tether is a complete response to this design challenge. It is a compact tether deployment and 
+charge-management system built around a 3U–1U dual-satellite architecture. The 3U frame on the mother 
+satellite houses the mechanical deployment system consisting of the reel and level wind subsystems, while 
+the 1U frame on the daughter satellite includes the tether attachment subsystem to secure and monitor the 
+tether wire and the electron emitter subsystem to keep the satellites electrically grounded. The Talon Tether 
+was engineered to maintain stable tension, manage electrodynamic effects, operate continuously in LEO’s 
+−40°C to +80°C temperature regime, and comply with mass and volume constraints while providing longduration operational reliability. 
+At the heart of the product is the reel subsystem, which stores and deploys the tether using a stepper motor 
+for precise rotational control. The motor meshes with the right reel mount, and the drive shaft fits into a D hole 
+on the right side of the spool. This connection allows the motor to drive the rotation of the spool. The left side 
+of the spool features a spur gear with 40 teeth that rotates around a ball bearing on the left reel mount to 
+minimize friction and ensure smooth, consistent rotation. Additionally, there is an M5 8-millimeter screw that 
+threads into the left side of the spool. A 5 mm hole is drilled above where the screw is threaded, and the end of 
+the tether wire is fed through this hole and wrapped around the screw so that it always remains secured. A 
+microservo-driven mechanical lock provides an emergency brake capable of instantly halting spool motion in 
+off-nominal conditions, supporting safe deployment, fault protection, and tension control. 
+To prevent tangling, bunching, or uneven layering of the tether wire, the product incorporates a 
+mechanically synchronized level wind subsystem. This assembly uses a smaller spur gear meshed with the 
+spool’s left side gear to drive the rotation of a bidirectional threaded rod. A sliding carriage translates along the 
+rod as the spool rotates, guiding the wire into evenly distributed layers. This subsystem enables high-density 
+storage in a restricted CubeSat volume while ensuring repeatable, reliable deployment. 
+The tether wire connects to the daughter satellite by the tether attachment subsystem, which securely 
+anchors the wire with upper and lower clamp blocks mounted to the 1U frame. The end of the tether wire bends 
+around an inside channel between the two clamp blocks, which are then bolted together with M3 bolts to crimp 
+the wire and keep it secure. An inline load cell connected between the clamp blocks and mount continuously 
+measures tether tension as the wire pulls on the clamp blocks, enabling closed-loop control and ensuring 
+
+6 
+operations remain within the material limits and factor of safety requirements. This subsystem transforms the 
+daughter satellite into an active component of the deployment and monitoring architecture. 
+Because the system can accumulate significant charge as it interacts with the ionosphere, the Talon Tether 
+includes a dedicated electron emitter subsystem[6],[7]. This subsystem uses a xenon tank, feed tube, and 
+plasma electron emitter capable of producing up to 3 A of electron flux[8]. By expelling electrons from the 
+system, the emitter prevents charge buildup, maintains electrical neutrality, and supports electrodynamic 
+tether effects in accordance with the mission requirements. 
+A critical aspect of the system’s performance was the selection of the tether wire material. Aluminum 5056-
+H18 was chosen due to its excellent balance of high tensile strength, low density, and good electrical 
+conductivity, making it ideal for long tether applications where mass efficiency is essential. Aluminum 5056-
+H18 also provides strong resistance to fatigue, corrosion, and cold welding which are key concerns for 
+conductive materials operating in the microgravity plasma environment of Low Earth Orbit. To enhance 
+durability, the wire is coated in Teflon FEP, which provides additional protection against cold welding, atomic 
+oxygen erosion, and ultraviolet radiation, ensuring reliable long-duration performance in the harsh LEO 
+environment. In addition to the subsystems and tether wire, the product also integrates a comprehensive 
+electronics and wiring architecture to support power distribution, motor control, tension monitoring, and 
+charge management. The electronics suite consists of a microcontroller, stepper motor controller, load cell 
+amplifier, power board, servo driver, and high-voltage converter necessary to energize the electrically powered 
+subsystems. 
+Combined, these subsystems and components create an integrated solution that meets all key 
+requirements of the design brief: controlled deployment of 50–150 m of conductive tether, stable tension 
+management, electrostatic charge dissipation, compliance with CubeSat volume and environmental 
+constraints, and reliable operation for at least six months in orbit. The Talon Tether provides a robust and flightready architecture that addresses the longstanding need for a safe and functional tether system for small 
+satellite missions. 
+
+7 
+1 Project Management 
+To plan a timeline of project tasks and facilitate organized management, Gantt charts were utilized for each 
+phase of the project—Discover, Define, Develop, Detail and Deliver phases. A Gantt chart features a series of 
+horizontal lines that show the amount of work done or completed in certain periods of time in relation to the 
+amount planned for those periods. Additionally, the chart features columns to denote each task, the assigned 
+team members, record progress, and provide start and end dates. At the start of the project initial Gantt charts 
+for each phase were developed to help guide tasks as shown in the figures below. 
+Figure 1.1: Initial Discover Phase Gantt Chart 
+Figure 1.2: Initial Define Phase Gantt Chart
+
+8 
+Figure 1.3: Initial Develop Phase Gantt Chart 
+Figure 1.4: Initial Detail Phase Gantt Chart 
+Figure 1.5: Initial Deliver Phase Gantt Chart 
+ As the project progressed, the initial Gantt charts were largely subject to change. This was due to several 
+reasons including the fact that some tasks were not needed for this specific project, more or less time had to 
+be allocated to certain tasks, member assignments were changed to better reflect strengths, and certain tasks 
+had earlier deadlines than initially realized. The figures below show the final Gantt charts for each project 
+
+9 
+phase. Note that in addition to major adjustments made to the content, the progress bars have changed from 
+0% to 100%. 
+Figure 12.6: Final Discover Phase Gantt Chart 
+Figure 1.7: Final Define Phase Gantt Chart 
+Figure 1.8: Final Develop Phase Gantt Chart 
+
+10 
+Figure 1.9: Final Detail Phase Gantt Chart 
+Figure 1.10: Final Deliver Phase Gantt Chart 
+
+11 
+2 Technical Background 
+The tether deployment system is a mechanical subsystem designed to perform with precision and 
+reliability. The system is required to manage tether deployment and retraction while preventing tangling, 
+uneven layering, or mechanical failure during operation. The design integrates mechanical and control 
+principles to create a compact mechanism capable of operating in Low Earth Orbit (LEO). Developing a system 
+like this requires a strong understanding of mechanical design, materials science, and electrodynamic 
+principles. 
+ Mechanically, many proposed tether missions involve long tethers (kilometers), and the same fundamental 
+principles underlie even short-length tether deployment mechanisms like the Talon Tether: controlled payout 
+and retraction. Early NASA missions have demonstrated the feasibility of deploying long conductive tethers in 
+LEO but also exposed recurring challenges, including maintaining tension, avoiding tangling, and controlling 
+electrostatic charge accumulation [3]. These prior missions established that a reliable tether system must 
+integrate mechanical, electrical, and control subsystems that are able to operate continuously under variable 
+temperature conditions. Designing a reliable tether reel demands knowledge of friction control and 
+mechanical synchronization. 
+ Another major area of technical background involves the interactions between a conductive tether and the 
+surrounding ions in LEO[6]. As the satellites move through space, they collect charged particles that can 
+damage the system if not properly managed. Prior research has established the need for a plasma electron 
+emitter to maintain safe levels of charge within the system. Understanding this plasma environment is critical 
+for integrating these systems into the tether deployment system. 
+ Knowledge of space-grade and space-qualified materials is essential for this project. It is necessary for 
+materials to withstand extreme fluctuations in temperature for the entire mission duration with line LEO. This 
+understanding was critical for material selection throughout the entire system, and especially for the tether 
+itself. Together, these areas of technical understanding formed the foundations required to develop the Talon 
+Tether’s compact tether deployment mechanism. 
+
+12 
+3 Discover Phase: Research 
+3.1 Need Statement 
+A tether system is needed to connect two 12U satellites with constant tension so they can rotate about 
+their common center of mass and generate either lunar or Martian gravity. To enable this mission capability, 
+the tether system must fit within a 3U CubeSat volume, deploy up to 150 meters of conductive wire, and 
+maintain a stable operating tension throughout deployment and maneuvering. The system must further 
+provide electrodynamic charge dissipation, survive launch and LEO environmental conditions, and operate 
+autonomously for a minimum of six months without maintenance. 
+3.2 5WH Analysis 
+The first step of the design process, after identifying the need, was to fully understand the problem. This 
+was done through a 5WH analysis with the goals of answering the questions: “Who has the problem?”, “What 
+is the problem?” “Where is the problem?” “When is the problem?” “Why is there a problem?”, and “How to fix 
+it?” The table below shows the answers to all these questions as they pertain to the tether system project. 
+Table 3.2.1: 5WH Analysis Table for Tether System 
+5WH Question Answer 
+Who has the problem? Mike Generale and his design team working on the small 
+satellite system have the problem to solve. The problem 
+affects mission operators and adjacent stakeholders such 
+as bus integrators, safety and review boards, launch 
+providers, ground segments, and component vendors. 
+What is the problem? It is difficult for two satellites in space to maintain stable 
+orientation and formation relative to one another due to 
+differential orbital mechanics. Satellites need propellant 
+to perform orbital maneuvers like changing altitude; 
+however, fuel is a finite resource that limits a satellite’s 
+lifespan and the scope of the mission. Extended 
+missions require an environment with gravity to 
+mitigate the negative effects of microgravity, but 
+creating artificial gravity in space is difficult and often 
+requires large and complex rotating spacecraft. 
+Where is the problem? The problem occurs in low Earth orbit (LEO) where 
+there is an abundance of space debris and atmospheric 
+drag as well as the presence of microgravity. 
+When is the problem? The problem begins during tether deployment where 
+maintaining tension and preventing slack is essential. 
+
+13 
+Then, over the mission lifetime of at least 6 months, the 
+system must withstand orbital thermal cycling, plasma 
+interactions, and material degradation. 
+Why is there a problem? The problem exists because standard CubeSat buses do 
+not include long tether deployment or two-body spin 
+control for artificial gravity. Additionally, maintaining 
+stable tension is difficult under strict limits of size, mass, 
+and power. These challenges are intensified by orbital 
+extremes such as thermal cycling, radiation, and plasma 
+charging, which can damage materials. Finally, the 
+solution needs to ensure reliability, safety, and fault 
+recovery over a long mission life. 
+How to fix it? A tether system is needed to connect two “12U” 
+satellites with constant tension to rotate about their 
+common center of mass and generate either lunar or 
+Martian gravity. 
+
+14 
+3.3 User Research 
+The Jobs-to-Be-Done analysis breaks the tether deployment sequence into clear steps, showing what the 
+system must do at each stage and why those actions matter. It highlights the mechanical tasks involved, the 
+features that help automate or safeguard them, and real examples of how the satellite would behave during 
+deployment. By laying out the process this way, the team could better understand what users expect from the 
+system and ensure the design supports smooth, reliable operation from start to finish. 
+Table 3.3.1: “Jobs to be Done” 
+Step Mechanics Innovation Example
+Define Identify deployment objectives 
+and required subsystems 
+(spool, tether, sensors, 
+emitter). 
+Integrated mission-planning 
+interface with automated 
+readiness checks for all 
+subsystems. 
+The operations team reviews 
+telemetry and confirms the 
+system is ready for tether 
+release. 
+Locate Position satellite in proper 
+orbit and orientation for 
+deployment. 
+Active attitude control with 
+feedback from onboard 
+sensors for precision 
+alignment. 
+The satellite autonomously 
+aligns to Earth’s magnetic field 
+before deployment begins. 
+Prepare Arm deployment mechanisms 
+and power related 
+components (motors, 
+sensors, electron emitter). 
+Automated power sequencing 
+and safety interlocks to 
+prevent accidental activation. 
+The onboard system performs 
+pre-checks and ensures the 
+tether spool and emitter are 
+safely armed. 
+Confirm Verify system safety and 
+readiness (power, tension 
+sensors, communication link). 
+Built-in diagnostics and 
+redundant sensor verification. 
+The satellite cross-checks 
+load-cell readings to confirm 
+zero tension before initiating 
+spool rotation. 
+Execute Deploy tether at controlled 
+speed and monitor tension. 
+Adaptive motor control 
+algorithm for smooth and 
+stable unwinding. 
+The motor releases the tether 
+while tension sensors adjust 
+the rate to avoid oscillation. 
+Monitor Continuously assess system 
+performance and 
+environmental response. 
+Real-time telemetry 
+visualization and automatic 
+fault detection. 
+Ground control monitors 
+current power draw, tether 
+tension, and spool rotation 
+rate through live data. 
+Modify Adjust or halt operations 
+based on data feedback. 
+Autonomous correction logic 
+that compensates for drift or 
+unexpected tension spikes. 
+The system pauses tether 
+release and repositions 
+attitude thrusters to stabilize 
+deployment. 
+Conclude Finalize deployment and 
+secure system for extended 
+operation. 
+Automatic tether lock 
+mechanism and emitter 
+deactivation protocol. 
+Once full length is deployed, 
+the tether locks in place, and 
+the emitter shifts to 
+neutralization mode. 
+
+15 
+3.4 Product and Patent Benchmarks 
+To benchmark potential tether deployment solutions, we began by reviewing historical and contemporary 
+tether satellite missions. This discovery process included examining systems from early demonstrations such 
+as Gemini XI (1966) to more advanced concepts like YES2 (ESA, 2007) and Aalto-1 Plasma Brake (2017–2022). 
+By analyzing these missions, we identified common deployment mechanisms, their operational challenges, 
+and their adaptability to CubeSat-scale constraints. Table 3.4.1 summarizes the pros and cons of each 
+deployment style along with their heritage. 
+Table 3.4.1: Tether Deployment Styles Table 
+Deployment style Pros Cons Heritage / Usage
+Reel-Based (Spool/Drum) Controlled 
+deployment/retrieval; 
+proven in missions 
+Large spool for 155 m 
+may exceed 2U; heavier; 
+risk of tangling 
+YES2 (ESA, 2007); SEDS1/2 (NASA, 1993–94) 
+Bobbin/Pancake Coil Flat coil fits better in 
+small volumes; simple 
+design 
+Less controlled 
+deployment; hard to 
+retract; risk of snags 
+CubeSat tether demos; 
+low TRL 
+Folded/Zig-Zag Packing Very space-efficient; 
+lightweight; no reel 
+needed 
+Jerky deployment; high 
+tangling risk; no easy 
+retraction 
+Conceptual for Aalto-1 
+Plasma Brake (2017–
+2022) 
+Cartridge/Cassette Modular; easy 
+integration; pre-packed
+Limited length per 
+cartridge; complex feed 
+mechanism 
+Proposed for modular 
+CubeSat tether kits 
+Inflatable Tube Extremely compact; no 
+reel required 
+Adds inflation system 
+complexity, risk of leaks, 
+and limited heritage 
+Lab-tested for deployable 
+booms; no major tether 
+missions 
+After evaluating deployment mechanisms, we shifted focus to tether materials, as their properties directly 
+influence strength, mass, and storage volume. Historical missions have employed a range of materials from 
+conductive wires for electrodynamic braking to high-strength fibers for structural integrity. Table 3.4.2 outlines 
+the advantages and limitations of these materials, along with examples of missions where they were 
+implemented or proposed. 
+Table 3.4.2: Tether Materials Table 
+Material Pros Cons Heritage / Usage
+Aluminum Wire Lightweight; good 
+conductivity 
+Low tensile strength; 
+prone to kinking 
+Aalto-1 Plasma Brake 
+(2017–2022) 
+
+16 
+Copper Wire Excellent conductivity; 
+widely available 
+Heavy; poor strength-toweight ratio TSS-1R (NASA/ASI, 1996)
+Hoytether Redundant strands; high 
+reliability; 
+micrometeoroid 
+resistant 
+Complex design; bulkier; 
+harder to store 
+ProSEDS (NASA) concept
+Terminator Wire Enables electrodynamic 
+braking; multifunctional
+Requires power system; 
+heavier; complex 
+integration 
+Terminator Tether 
+concept 
+Wire Tape Very compact storage; 
+good for electrodynamic 
+applications 
+Limited tensile strength; 
+harder to handle 
+TiPS (NRL, 1996–2006); 
+YES2 (ESA, 2007) 
+Kevlar Extremely strong; 
+lightweight; high tensile 
+strength 
+Non-conductive; may 
+require coatings; can fray 
+under abrasion 
+TiPS; YES2; Gemini XI 
+(1966) 
+From this comparative analysis, several trends emerged. Deployment systems with controlled spooling 
+have demonstrated reliability in past missions, while materials offering a balance of strength and 
+compactness are critical for meeting volume and load constraints. Conductive options like aluminum and 
+copper have been favored for electrodynamic applications, whereas Kevlar and Hoytether designs excel in 
+durability. These insights will guide the design direction toward solutions that optimize storage efficiency, 
+mechanical strength, and operational simplicity without compromising mission objectives. 
+
+17 
+3.5 Kano Model 
+A Kano model was developed to sort the project’s design goals into three categories: Attractive (green), 
+Performance (blue), and Basic (red). Attractive features, such as minimizing mass or occupied volume, provide 
+disproportionately high client satisfaction the more they are achieved. Performance features like power draw 
+and heat dissipation exhibit a linear relationship, meaning improvements directly translate to proportional 
+increases in satisfaction. Basic features, including reliability and maintaining constant tension, represent 
+fundamental expectations: they must be met for the system to be considered acceptable, but exceeding them 
+does not meaningfully increase client satisfaction. This categorization helped the team prioritize design 
+decisions based on how each feature contributes to overall client satisfaction. The Kano model used for this 
+project is shown in Figure 3.5.1 below. 
+Figure 3.5.1: Kano Model of Tether System 
+
+18 
+4 Define Phase: Specifications 
+4.1 Customer Needs List 
+The following table lists the qualitative goals the system must achieve. These requirements were 
+determined from both the initial request for Summanus Aerospace Tether Deployment document and 
+interviews with the client on which goals were flexible or not. 
+Table 4.1.1 Customer Needs List 
+Subsection Requirements
+General Requirements
+1. Safety: The system must operate safely during all mission phases, including handling, launch, 
+deployment, and retraction. Components must meet applicable space safety standards and prevent 
+risks such as cold welding, electrical shorts, and tether-snap events. 
+2. Reliability: The system must maintain functionality for the full six-month mission duration, 
+possessing resistance to radiation, temperature cycling, and vacuum exposure. 
+3. Mass Constraints: The combined structure, reel, wire, housing, and electronics must remain within 
+the allowable mass limit. 
+4. Volume Constraints: All components must fit within the allocated envelope without interfering with 
+other payloads or mechanisms. 
+5.Power Constraints: The system must operate within the power limits defined by the Cubesat bus. 
+6. Environmental Survivability: All subsystem components must withstand vacuum, vibration, thermal 
+cycling, and launch loads without loss of structural integrity or operational ability. 
+7.Ease of Integration: The system must be compatible with existing CubeSat structural standards and 
+allow efficient assembly, inspection, and mounting. 
+8. Cost Constraints: The system must be feasible within the client-specified budget and use materials 
+and manufacturing processes that are accessible and practical. 
+Structural Requirements
+1. Rigidity: The frame must provide sufficient stiffness to prevent undesired deflection during 
+deployment, tensioning, and launch loads. 
+2. Fastener Integrity: Joints must maintain structural integrity under all operational conditions and 
+meet appropriate torque and safety-factor guidelines. 
+3. Material Compatibility: Structural materials must not outgas excessively, cold-weld, or react 
+dangerously with other components. 
+4. Geometric Compatibility: The frame must practically fit into the Cubesat in a way that effieicently 
+utlilizes the allocated volume envelope. 
+5. Thermal Stability: The materials used in the frame must be reistant to failure from thermal 
+expansion, melting, embrittlement, or weakening. 
+6. Ease of Assembly: The structure must allow the g components to be installed with minimal tools 
+and within reasonable assembly time during integration.
+Reel/Tether Deployment 
+Requirements
+1. Deployment Reliability: The reel must deploy and retract the tether without jamming, snapping, 
+jerking, or tangling. 
+2. Tether Safety Factor: The tether must be designed with a minimum factor of safety of 2. 
+3. Electrical Capabilities: The system must be able to discharge static buildup to prevent arcing and the 
+tether must be conductive if the static is only discharged on one satellite. 
+4. Bend Radius Consideration: The tether routing path must maintain an acceptable effective bend 
+radius to minimize fatigue and prevent tether damage during deployment. 
+5. Level Wind Functionality: The guiding system must maintain consistent tether alignment on the reel 
+during spooling and unspooling to prevent overlap, jamming, or cross-winding. 
+6. Motor Functionality: The deployment system must match the torque, speed, and power 
+characteristics of the selected motor and maintain smooth control across the entire tether length. 
+7. Environmental Durability: The reel and tether must resist wear, friction, and degradation due to 
+vacuum conditions, thermal cycling, and potential micrometeoroid exposure. 
+8. Lifespan: The reel mechanism must remain functional throughout all deployment cycles required by 
+the mission, including 6 mongths of locking and the retraction phase.
+
+19 
+4.2 Product Design Specification (PDS) 
+The table below translates the requirements from Table 4.2.1 from qualitative goals into quantitative, 
+measurable targets to be designed around, which guided decisions made in the Develop and Detail phases. 
+Table 4.2.1 Product Design Specification Table 
+Category # Item Src Units Acceptable Verification
+Notes/Reference/Comm
+ents 1 Size and Weight 1.1
+Fits within CubeSAT tethering system designated volume 1, 2 cm^3(10cm x 10cm x 20cm) [2U] or (10cm x 10cm x 30cm) [3U] Tape Measure
+Summanus Aerospace Tether Deployment 2.1
+1.2 Is lightweight 1, 2 kilograms <3kg for 2U, <5kg for 3U Scale Summanus Aerospace Tether Deployment 2.2
+2 Performance 2.1 Has a maximum power draw2, 5 Watts <6 Multimeter Renegotiated with client 2.2 Has an operational voltage 2, 5 V 215-225 Multimeter 2.3 survives vibration at a specified frequency 2, 5, 6 Hz 20-2000 Vibration Testing GSFC-STD-7000
+2.4 Operates at a temperature 2,6 ºC -40-80 Thermometer 3 Aesthetics 3.1 Has a uniform shape 3, 7 - Rectangular prism Visual Inspection Summanus Aerospace Tether Deployment 5.1
+3.2 Reduces fabrication complexity and maintains uniform shape 3,7 - Simple rectangular geometry Visual Inspection Use simple rectangular housing plates with laser cut or milled edges 4 Materials 4.1 Has an operational adjustable tether wire 1, 2, 5 m 50-150 Measuring Wheel Suitable conductor for static buildup dischardge 4.2 Housing system has a specified material 4, 5, 1 - AI 6061/7075 compatible Supplier Specification Summanus Aerospace Tether Deployment 4.1
+4.3 Has a maximum production cost 4 USD 85,000 Cost Estimation Tables Summanus Aerospace Tether Deployment 1.1
+4.4 Has a maximum prototyping cost 4 USD 35,000 Cost Estimation Tables Summanus Aerospace Tether Deployment 1.2
+4.5 Has a specified tether wire material 1, 2, 4 - Aluminum 5056 Supplier Specification
+4.6 Has a specified tether wire thickness 1, 2, 4 mm 2.05 Calipers 4.7
+Frame bolts have proper tightening torque 1,2,4 in-lbs 20 Bolt and joint calculation for M3 x class 12.9 bolts NASA-STD-5020
+5 Usability 5.1 Easy to operate 5, 2 Minutes <5 Timer 6 Safety 6.1 Tether tension has a minimum safety factor 2, 5, 6 - Greater than or equal to a FS of 2
+Tensile test NASA-STD-5001B
+6.2 Has minimum life span 2,6 Cycles 10^6
+Life estimation from goodman material fatigue curve NASA-STD-5001B
+7 Installation 7.1 Must be easily to assemble 7, 1 Hours <12 Timer 7.2 Material must be compatible 7, 2, 4 - Resistant to galling, cold welding Material Analysis GSFC-STD-7000; NASA- STD-6016
+8 Environment 8.1 Withstands conditions in space environment 8, 5, 2 Cycles 10^6 Dynamic Anaylsis 9 Standards 9.1 Space Debris Mitigation 9,8,6 - Minimize release of debris; Post-mission disposal plan; Probability of casualty ≤ threshold; Limit long-lived debris Documentation review and Inspection of operational procedures
+ISO 24113:2023; NPR 8715.6B
+9.2 Fracture Control 9,2 - Fracture control plan; Allowable flaw sizes; NDT inspection
+Engineering Analysis & NDT NASA-STD-5019A; NASA- HDBK-5010
+9.3 Structural Design & Safety Factors 9,6 - Safety factors per NASA- STD-5001B
+Structural Analysis & Proof Testing NASA-STD-5001B
+9.4 Materials & Processes 9, 4 %
+Controlled M&P; Outgassing TML ≤ 1.0%, CVCM ≤ 0.10% Materials Review & ASTM E595 test NASA-STD-6016; ASTM E595
+9.5 Mechanism Reliability 9, 2 - No galling, cold-weld, or wear debris; Secondary restraint Mechanism Life Testing NASA-STD-6016
+9.6
+Environmental Verification 9, 2, 6 °C / Pa / rad Survives thermal vacuum, cycling, radiation Environmental Testing GSFC-STD-7000
+9.7 Workmanship 9, 4 - Meets workmanship standards for assembly, wiring, bondingInspection & Audit NASA-STD-8739.x
+
+20 
+4.3 Use Model 
+A use model was created to define how the On Board Computer (OBC) would interact with the tether 
+systems’ electronics and how they would interact with one another. The model helps to show the sequence of 
+inputs, outputs, and actions involved in the entire process of deploying and retracting the tether. In the model 
+shown in Figure 4.3.1 below, the circular/oval boxes represent the start and end of the use process, the 
+rectangular boxes represent steps in the use process, and the diamond boxes represent checkpoints that need 
+to be met before moving on in the use process. 
+ 
+Figure 4.3.1: Use Model of Tether System 
+
+21 
+4.4 Function Model 
+A functional model diagram was created to portray the analysis of the and functions of the tether 
+deployment system. The analysis consisted of inputs and outputs containing all electrical, material, and 
+command functions. The overall function model (Figure 4.4.1) and the functional model diagram (Figure 4.4.2) 
+were created 
+Figure 4.4.1: Overall Function Model 
+4.4.2: Functional Model Diagram
+
+22 
+5 Develop Phase: Ideation 
+5.1 Alternative Design Concepts 
+Before sketching design concepts, a combination chart was utilized to generate multiple ideas to fulfill 
+each potential function of the design. Each row of the chart corresponded to a certain topic or function of the 
+design, and then four potential solutions were listed across the columns with an image of each. The table 
+below showcases the combination chart used for this project to generate ideas for important components of 
+the design, such as the tether, reel and stow mechanism, locking mechanism, tension sensor, frame material, 
+etcetera. Note that not every part or function listed in the chart was used in the concept sketches or final 
+solution due to later design decisions. 
+Table 5.1.1: Combination Chart for Tether System 
+Design Alternatives 
+Option 1 2 3 4 
+Tether 30-gauge insulated 
+copper wire 
+Multi-strand lightweight 
+conductive wire
+Tape/flat ribbon conductor Composite core with 
+conductive braid
+Reel & Stow 
+Mechanism 
+Spring loaded constant 
+tension reel
+Motorized spool with 
+closed loop speed 
+control
+Friction brake controlled 
+payout 
+Spool + centrifugal 
+clamp
+Locking 
+Mechanism 
+Mechanical pin/ clevis 
+latch 
+Motorized cam lock
+ 
+Shear pin + secondary 
+retention 
+Microservo powered 
+gear lock 
+
+23 
+Tension 
+Sensing 
+Inline load cell Reel torque sensor Optical encoder Accelerometer
+Frame Material Aluminum 6061-T6 Carbon-fiber composite Titanium Alloy (Ti-6AI-4V) Aluminum honeycomb 
+sandwich panel 
+Exit Guide Ceramic eyelet PTFE Guide Roller Sheave Eyelit Ring 
+Electron 
+Emitter 
+Stellant Electron 
+Emitter 
+Plasma Contactor Electron Gun SFHC 250F 
+Release 
+Mechanism 
+Burn wire Pin puller SMA latch Active fastener
+Swivel 
+Mechanism 
+Ball Bearing Swivel Swivel Electrical 
+connectors 
+Pinned Sleeve Swivel No swivel 
+
+24 
+Damping Friction brake Eddy Current Damper Dashpot Magnetic brake 
+Control torque Direct Drive motor Capstan Brushed motor Rotary Swivel 
+Energy 
+Conversion 
+Multiple MPPTs Singular MPPT DET Hybrid 
+Energy 
+Distribution 
+Single main bus Bus + POL Split bus Isolated motor 
+Power Storage Cylindrical Cells Pouch cells LiFePO4 cells Redundant 
+
+25 
+Power 
+Protection 
+BMS Chip SSPCs Oring ideal diode Fuses 
+ After the combination chart was complete, each team member generated a concept sketch using the ideas 
+from the above table as a guide. These sketches were done individually to ensure each idea was unique and 
+approached solving the problem in a different way. In addition to the concept sketch, each team member wrote 
+a brief description of their design in terms of what it consisted of and how it worked. The table below shows 
+the nine concept sketches and descriptions generated by each member of the team. 
+Table 5.1.2: Design Alternatives Chart for Tether System 
+Iteration 1 Design Sketches 
+Concept Sketch Description 
+Design A: Bryce Addeo Design A for the tether system features a reel and wire 
+guide simultaneously driven by a dual motor. Electric 
+energy from an external power source enters the motor 
+through electronics and jumper wires. The main motor 
+converts the electric energy to mechanical energy and 
+rotates the spool at a set speed. The rotational motion of 
+the second motor is converted to translational motion of 
+the wire guide due to the threaded axle it travels along. 
+Therefore, the dual motor system rotates the reel and 
+translates the wire guide so that there is always an even 
+distribution of wire across the spool. The wire goes 
+through two rollers on the guide with just enough 
+clearance for the wire to nondestructively fit through. This 
+ensures a smooth release of the wire while keeping 
+appropriate tension. Additionally, these rollers can be 
+locked to prevent unwanted release of the tether wire once 
+the correct length is achieved. The wire connects to an 
+inline load cell on the other end that measures the tension 
+in the wire. This load cell features threaded screws on both 
+sides to easily attach to the other satellite. The spool has 
+large wheel-like sides that sit in grooves in the frame, 
+which allows for smooth and secure motion. 
+
+26 
+Design B: Sean Raymond Design B features the drum, which holds the tether wound 
+in layers and spins on a shaft. A brushless DC motor 
+(BLDC) with a field-oriented controller provides smooth, 
+precise torque to spin the drum. An encoder mounted on 
+the shaft measures rotation for both motor control and 
+length estimation. During launch, the drum is locked by a 
+pin-puller mechanism that interfaces with the flange of the 
+drum, preventing motion under vibration. Once in orbit, 
+the pin-puller retracts the pin on command, freeing the 
+drum for rotation. To prevent the tether from whipping or 
+slapping, two passive brakes ensure smooth payout. A 
+spring-loaded friction pad presses against the drum rim, 
+providing constant drag, and an eddy-current damper, 
+which is an aluminum disk on the shaft with magnets, 
+creates speed-proportional drag. At the tether exit, an 
+eyelet ensures smooth guidance, an inline load cell 
+measures tether tension, and a swivel prevents torsional 
+buildup in the tether. 
+Design C: Matthew Strogach Design C begins with the mother satellite that houses the 
+tether spool, torsional spring, electromagnetic motor, 
+actuated pin puller, and slip ring. The other satellite 
+contains a housing with a load cell clamp that threads into 
+the frame, anchors the tether, measures tension, and sends 
+data to the control board to stop the spool when needed. 
+The tether passes through a rotary swivel right after the 
+mother satellite to prevent twisting as the satellites move 
+and rotate. A torsional spring mounted on the spool shaft 
+keeps the tether under passive tension, absorbs jerk, and 
+stores energy during deployment to help stabilize the 
+system. The electromagnetic motor actively controls spool 
+rotation once the pin puller is released, regulating speed, 
+braking, and reversing if retraction is required. A slip ring 
+on the spool shaft transfers electrical power from the 
+rotating spool to the CubeSat. A reusable launch lock 
+prevents vibration-induced spool movement before 
+deployment. The control board powers the motor and 
+receives feedback from a shaft encoder that measures 
+spool rotations and tether length while also monitoring 
+tension from the load cell. During deployment, if tension 
+goes too high or too low, the load cell triggers the motor 
+to brake. The wiring integrates the motor driver, encoder 
+signals, and load cell lines to all electrical systems in the 
+design. 
+Design D: Wyatt Fritchman Design D for the tether system features a spool driven by 
+a motor and a self-locking worm gear mechanism. The 
+wiring inside the tether is 30 gauge insulated copper wire, 
+which is encased by a protective outer layer. The outer 
+layer has both primary and secondary lines to ensure 
+protection of the wiring. The tether is wound onto the 
+
+27 
+spool, which is fixed to a shaft that can freely rotate. This 
+shaft is driven by the motor. The motor drives the spool, 
+and a self-locking worm gear stops the tether at the desired 
+length and cannot be back-driven due to its high 
+mechanical advantage. The motor can reverse the 
+direction to bring in the tether at the end of the mission. A 
+tachometer is used to determine how much of the tether 
+was released. Slip rings on the rotating shaft allow the 
+electronics from the CubeSat to connect to the tether 
+wiring. All of this is housed inside a 2U frame, with the 
+motor, slip ring stator, and tachometer being fixed to the 
+frame. The frame is made of aluminum 6061-T6. There is 
+an in-line load cell fixed to the second CubeSat and the 
+tether which detects the tension in the tether. There are 
+more slip rings in the second CubeSat to ensure 
+connection, and a tether swivel joint is used to allow for 
+the CubeSat to spin without twisting the tether. 
+Design E: Joseph Feliciano Design E uses a tether deployment system modeled after a 
+level-wind reel, where the main satellite contains a 
+motorized spool and level-wind screw that regulate 
+winding and unwinding at a controlled rate. The tether 
+passes through an eyelet before exiting, reducing angular 
+stresses and keeping the line straight. A smaller “anchor” 
+satellite serves as the reaction point and is equipped with 
+rod-end bearings to allow free rotation and prevent 
+unwanted torsion on the tether. To monitor forces, the 
+anchor satellite also includes an inline load cell that 
+continuously measures tether tension and sends data back 
+to the main satellite. With this feedback, the main satellite 
+can automatically adjust the spool speed to maintain 
+proper alignment and tension, while the anchor passively 
+stabilizes the tether. This configuration ensures smooth 
+deployment, accurate tension measurement, and reliable 
+control of tether conditions throughout the experiment. 
+Design F: Rex Rosenblum Design F utilizes a primary spool that contains the wound 
+tether with a direct drive stepper motor with a built-in 
+gearbox and a Rotary encoder. At the far end of the spool 
+there’s an electrical slip ring to allow power and signals 
+running through the tether to get to the onboard CPU 
+without twisting. Near the exit, a rotary encoder attached 
+to a friction wheel presses against the tether along with 
+two spring loaded friction wheels to get an accurate tether 
+length. A bistable mechanism is used as a lock to prevent 
+the spool from unreeling during launch and anytime before 
+the device is ready to deploy. The system can also be used 
+
+28 
+to lock the spool once the desired tether length has been 
+reached. A solenoid is used momentarily to switch the 
+bistable spool lock on and off and an emergency lock 
+bypass is situated near the lock so when a servo is 
+actuated, a compressed spring will force the lock open in 
+the case of solenoid failure. At the end of the tether, where 
+it mounts to the other 12U satellite, there is a slip ring 
+paired with an inline load cell to create a closed loop 
+system with motor control to maintain appropriate tension. 
+Design G: Nick Leger Design G centers around the employment of a direct 
+drive motor to drive a worm gear that drives a spur 
+gear connected to the spindle. The worm gear utilizes 
+a high mechanical advantage so it is inherently selflocking as the worm gear can drive the spur gear, but 
+it takes many magnitudes more force for the spur 
+gear to drive the worm gear. The wire being used is 
+multistrand ribbon cable which means that the cable 
+sits uniform and flat in the spindle; this property of 
+the cable allows the attached tachometer to calculate 
+the length of spindle expended through the rotations 
+of the spindle and the Arduino controller. The cable 
+attaches to the other cube sat through a slip ring and 
+a load cell to both be able to rotate freely to prevent 
+kinking or twisting and to be able to calculate the 
+tension in the cable. 
+Design H: Joel Chung 
+Design H consists of three main categories: 
+electrical, tether mechanism, and tether control. The 
+electrical system consists of power from the tether 
+passing through a PCB into an ideal diode Oring FET 
+(one-way current control), an SSPC (current limiting 
+and fault isolation), and an MPPT (optimizes 
+efficiency), before being stored in a supercapacitor 
+bank and finally a lithium-ion battery pack. The 
+
+29 
+- 
+tether mechanism consists of a brushed DC worm 
+gear motor that drives the level-wind carriage to 
+evenly deploy and retract the tether, housed in an 
+aluminum 6061-T6 bracket. The tether control 
+system consists of the tether (30 AWG insulated 
+copper) being guided through an eyelet with an eddycurrent damper for smooth control, while a solenoidpowered press shoe brake provides a hard stop to 
+maintain tension and prevent unwanted movement. 
+Design I: Karam Zarnatzi Design I features a compact reel and level-wind assembly 
+that can fit in a 2U CubeSat, or potentially a 1U. A stepper 
+motor drives the spool, chosen over a BLDC for its 
+precision, reliability, and ability to deliver high torque at 
+low speeds, with a spring-applied brake mounted on the 
+motor shaft acting as a failsafe to lock the spool during 
+launch vibrations and automatically engage if power is 
+lost. A compound-reverted geartrain connects to the motor 
+shaft, providing speed reduction and torque multiplication 
+while reducing motor load, and the gearbox drives a 
+passive drag element that maintains adjustable baseline 
+tension to prevent slack during deployment. This connects 
+to the cylindrical tether spool with flanges, while a lead 
+screw carriage guides the tether evenly across the reel to 
+avoid crossovers and jams. Before exiting the housing, the 
+tether passes through a load cell and fairlead, with the load 
+cell monitoring tension and enabling adjustment of 
+deployment length, and the fairlead reducing stress on the 
+tether. At the attachment point to the companion satellite, 
+a bearing allows free rotation without torsional loading. 
+The design leaves ample space for electronics and sensors, 
+with all components communicating to maintain the 
+specified baseline. 
+
+30 
+5.2 Concept Evaluation 
+To successfully determine which of the 9 individual concept sketch drawings would be best suited for 
+generation, a selection criteria chart was first developed. This chart consisted of 7 consideration factors that 
+were each assigned a different weighted value of importance. The chosen criteria were cost, 
+manufacturability, reliability, redundancy, mass/volume, tether release mechanism effectiveness, and proper 
+utilization of sensors and electronics. Reliability was selected to have the highest weight in decision-making 
+as it dictates and determines the design’s ability to perform without failure. The selection criteria table (Table 
+5.2.1) would serve as a baseline for choosing the best design concept sketch. 
+Table 5.2.1: Selection Criteria Table 
+Selection Criterion Weight Description
+Cost 12.5% The price of raw materials, off the shelf components 
+and manufacturing. 
+Manufacturability 17.5% Considers both the number and complexity of parts, 
+fasteners, sub-mechanisms and manufacturing 
+time. 
+Reliability 25% Considers the design’s ability to perform without 
+failure. 
+Redundancy 5% The ability of the system to fail and continue 
+performance with backup components. 
+Mass/Volume 20% Considers how much it weighs and how much space 
+it takes up (1U, 2U, 3U, etc.). 
+Tether Release 
+Mechanism Effectiveness 
+15% Considers the effectiveness/efficiency of the 
+mechanism responsible for retracting/deploying the 
+tether. This includes locking, maintaining tension, 
+distribution of wire on the reel, and the ability to 
+retract. 
+Proper Utilization of Sensors and 
+Electronics 
+5% Considers how well thought-out the configuration of 
+sensors and electronics is. This includes specific 
+names and functions for sensor/electronics and 
+proper power flow. 
+After the creation of this table, a Pugh Chart (Table 5.2.2) was then developed. In this chart, one of the 
+concept sketches created was chosen to serve as a reference to the other designs. The reference sketch was 
+selected based on group discussion and client needs, determining that Design B would serve as a strong 
+middle-ground design. Using factors from the selection criteria, each of the concepts was ranked against 
+Design B and scored to determine the best one. Using each of the selection criteria, a plus symbol was used 
+to determine if a selection criterion in a design was better than the one in Design B. A minus sign was used if a 
+design ranked worse in each selection criterion than in Design B. Finally, a zero was entered if both designs 
+
+31 
+were determined to be equal in following the assigned selection criteria. A plus symbol would correspond to 1 
+point, a minus symbol would subtract a point, and a zero would change nothing. The rankings were assigned 
+based on group discussion and deliberation in addition to client needs and the weighting of each selection 
+criteria. After each design was compared, the pluses and minuses were combined to determine final point 
+values. This chart would not only allow for determination of the best design concept, but it also allowed for an 
+analysis of which designs were strongest in certain selection criteria. This would be valuable for possible 
+combinations of design concepts in the final CAD model. 
+Table 5.2.2: Design Concept Pugh Chart 
+After the chart was completed and the final points were determined, the four designs with the highest 
+scores were selected to move forward into a decision matrix. The designs with the highest scores were 
+concepts B, D, F, and G, with concept F having the highest ranking with a net total of 1 point. The decision 
+matrix (Table 5.2.3) was used to score the four highest-ranked concepts by ranking each of the selection 
+criteria for each concept on a scale of 1-10. The weight assignments of each selection criteria were 
+incorporated to create a final average for each of the four designs out of 10. To determine these ranking 
+assignments, another round of group deliberation was completed for each selection criteria in each of the 
+individual designs. Decisions were also made based on client needs. 
+
+32 
+Table 5.2.3: Design Concept Decision Matrix 
+After the decision matrix was completed, Design F had the highest total rating of 6.55, proving to be the best 
+design concept. This design had much better redundancy, reliability, and excellent proper utilization of 
+sensors and electronics compared to the other concepts. Its detailed wiring system would provide a strong 
+basis for CAD modeling of the final product. Its simplicity would serve well in the actual creation of the model. 
+The only criteria that design F ranked lower in was cost from the complicated wiring system and mass, and 
+volume. However, the cost did not rank significantly lower than the other designs, and mass and volume 
+produced a lower ranking for all four of the concepts. However, mass and volume only had a 5% weighting 
+value; therefore was not a very effective factor in making the final decision. Design F would serve as the best 
+selected concept and would be used for CAD modeling, while strong parts from other concepts may be used 
+as well to output the best overall design. 
+
+33 
+6 Deliver Phase: Final Design Concept 
+6.1 Product Assembly and Systems 
+The final design concept shown in Figure 6.1.1 below incorporates a larger 3U frame for installation into the 
+mother satellite and a smaller 1U frame for attachment to the daughter satellite. Starting at the top right of the 
+3U frame and rotating counterclockwise, the design features a motor, a reel subsystem, a microservo reel lock, 
+and a level wind subsystem. Moving to the 1U frame, there is the tether attachment subsystem and the 
+electron emitter subsystem. Finally, there is the tether wire that connects the two frames together, and a box 
+representing where the CPU and electronics would go in the 3U frame. The reel subsystem is the main system 
+that contains the tether wire and has locking capabilities to ensure no accidental unspooling during launch. 
+The reel has a geared connection with the level wind subsystem to allow for orderly tether spooling without 
+additional motors. 
+Figure 6.1.1: Full Design Assembly with Important Components and Subsystems Labeled 
+The reel subsystem displayed in Figure 6.1.2 below is comprised of a main spool, mounts on either side, a 
+supporting ball bearing, and a drive motor. The addition of a small servo motor attached to the left reel mount 
+adds locking capabilities to the system as well. The stepper motor used has a built-in gearbox that ends with a 
+D profile output shaft that meshes with a cutout in the side of the spool, allowing for power transfer. The motor 
+uses four screws to mount rigidly to the right reel mount and acts as a bearing for the spool. On the left, the 
+spool uses a ball bearing supported by the left reel mount to increase reliability, decrease wear, and ensure 
+smooth spool rotation. An M5 screw threads into the gear end of the spool and acts as an anchor point for the 
+end of the tether wire that feeds through the small 5-millimeter hole drilled radially into the spool. Wrapping 
+the end of the tether wire around this screw ensures the tether remains attached to the spool even at full 
+extension. Finally, a micro servo motor mounts to the left reel mount with two M2 bolts and, when actuated, 
+acts as a physical interlock to the built-in gear on the spool. 
+
+34 
+Figure 6.1.2: Exploded View of Reel Subsystem with Labeled Components
+The level wind subsystem shown in Figure 6.1.3 below mounts directly in front of the previously mentioned 
+reel subsystem and is responsible for maintaining even and orderly spooling and unspooling of the tether. The 
+main component is the bidirectional threaded rod that the carriage rides back and forth on. The threaded rod 
+is supported on both ends by bearings that are mounted to the 3U frame via bearing mounts and M3 screws. A 
+second, smooth rod lies below the threaded rod and runs through a clearance hole in the carriage, preventing 
+any twisting. Finally, at the far end of the threaded rod, there is a drive gear that meshes with the gear on the 
+reel subsystem and is held in place using an alignment key and E-clip. 
+Figure 6.1.3: Sectional View of Level Wind Subsystem with Labeled Components 
+
+35 
+ The tether attachment subsystem in Figure 6.1.4 below is one of two main systems in the 1U daughter 
+satellite. A triangular mount is fastened to the 1U frame via four M3 bolts, and a clearance hole on the vertical 
+face acts as a mounting point for the load cell. A lock nut threads onto one end of the load cell, connecting it 
+to the mount. The other end of the load cell threads into the lower clamp block in the rear, and the upper clamp 
+block screws down onto that. Before torquing the screws, the tether is fed into the slot and, upon tightening, 
+is securely fastened to the clamping block assembly. Due to the direct connection from the tether to one end 
+of the load cell and the other end being stationary, any tension in the tether will be accurately measured with 
+the load cell. Tension data is read by a small onboard computer, and the results are fed to the larger satellite's 
+computer for transmission. 
+Figure 63.1.4: Isometric and Section View of Tether Attachment Subsystem with Labeled Components 
+ Finally, the electron emitter subassembly shown in Figure 6.1.5 is comprised of an off-the-shelf electron 
+emitter and mount which is designed to emit up to 3 Amps. A gas tube connects the electron emitter to a xenon 
+tank which is held in place with its own mount. The same small onboard computer used for the load cell also 
+monitors static build up and actuates the electron emitter as needed to dissipate charge. The chosen electron 
+emitter relies on high voltage which comes from its controller to ionize the on-board xenon gas to create 
+plasma. Plasma is highly conductive due to the excess number of electrons, so the plasma “beam” created by 
+the electron emitter effectively creates a wire that connects the satellite to the surrounding space with a lower 
+potential allowing for current to flow. Overall, the electron emitter ensures that excessive static charge is 
+dispelled into space to keep the entire system grounded [12]. 
+
+36 
+Figure 6.1.5: Isometric View of Electron Emitter Subsystem with Labeled Components 
+
+37 
+6.2 Bill of Materials 
+The following tables portray each of the parts used for each individual subsystem in the entire assembly. 
+All the details of each part are specified, including the quantity used in the sub-assembly, the description 
+of the part, and the specific part number, with a mix of both machined and off-the-shelf (OTS) parts. There 
+are a total of 4 subsystems in this assembly. These consist of the reel subsystem, the level wind subsystem, 
+the tether attachment subsystem, the emitter subsystem, and the frame subsystem. One bill of materials 
+list was created for each subsystem. An additional bill of materials list is also included for the final 
+assembly. Each custom-modified part from a subsystem has a part number beginning with the first letter 
+of each subsystem (ex, R for reel subsystem), followed by its number. Off-the-shelf parts are also labeled 
+beginning with the first letter of each subsystem, followed by a dash, then the vendor abbreviation, followed 
+by another dash, then “OTS,” and then its number. If the part was OTS but modified to be put into the model, 
+“MOD” is written before the dash “OTS.” The vendors used are McMaster (MC), CalfineWire (CW), and 
+Kimball Physics (KP). 
+Table 6.2.1: Frame Subsystem BOM 
+Part Part Number Description Quantity
+1 F-MC-OTS-001 3U Frame Bar 4
+2 F-MC-OTS-002 3U Frame Plate 1
+3 F-MC-MOD-OTS-001 1U Frame Bar 4
+4 F-MC-OTS-003 1U Frame Plate 1
+5 F-001 Frame Cap 4
+6 F-MC-OTS-004 M3 X 0.5 mm Class 
+12.9 Frame Bolts 
+16
+Table 6.2.2: Reel Subsystem BOM 
+Part Part Number Description Quantity
+1 R-MC-OTS-001 Stepper Motor with 
+Gearbox 
+1
+2 R-001 Right Reel Mount 1
+3 R-002 Spool 1
+4 R-MC-OTS-002 Ball Bearing 1
+5 R-003 Left Reel Mount 1
+6 R-MC-OTS-003 M5 X 8 mm Screw 1
+7 R-MC-OTS-004 MicroServo Reel Lock 1
+
+38 
+8 R-MC-OTS-005 M2 X 8 mm Screw 2
+9 R-MC-OTS-006 M2 Lock Nut 2
+10 R-MC-OTS-007 M3 X 8 mm Screw 4
+11 R-MC-OTS-008 M3 Lock Nut 4
+Table 6.2.3: Level Wind Subsystem BOM 
+Part Part Number Description Quantity
+1 L-001 Carriage 1
+2 L-002 Bidirectional Threaded 
+Rod 
+1
+3 L-MC-MOD-OTS-001 Bearing 2
+4 L-MC-OTS-001 2 mm Alignment Rod 1
+5 L-003 Bearing Mount 2
+6 L-MC-OTS-002 M3 X 8 mm Mounting 
+Bolts 
+6
+7 L-004 Drive Gear 1
+8 L-MC-OTS-003 Alignment Key 1
+9 L-MC-OTS-004 E-Clip 1
+Table 6.2.5: Tether Attachment Subsystem BOM 
+Part Part Number Description Quantity
+1 T-001 Tether Attachment
+Mount 
+1
+2 T-MC-OTS-001 Load Cell 1
+3 T-CW-OTS-002 Tether 1
+4 T-MC-OTS-003 M3 X 8 mm Clamp Bolt 3
+5 T-002 Top Clamp Block 1
+6 T-003 Bottom Clamp Block 1
+7 T-MC-OTS-004 M3 X 8 mm Mounting 
+Bolt 
+4
+Table 6.2.6: Electron Emitter Subsystem BOM 
+Part Part Number Description Quantity
+
+39 
+1 E-KP-OTS-001 Electron Emitter 1
+2 E-MC-MOD-OTS-001 Gas Tube 1
+3 E-KP-OTS-002 Xenon Tank 1
+
+40 
+7 Deliver Phase: Concept Analysis 
+7.1 Design Analysis 
+Tether Wire Storage Capacity of Spool 
+The spool was designed with 40 mm side flanges and a 150 mm long and 20 mm diameter axle. Once the 
+tether wire was selected to have a diameter of 2.05 mm, the total length of wire that the spool could store had 
+to be calculated to ensure the 150 meters requirement for generating Martian gravity was met. First, the total 
+volume of space between the axle and flanges of the spool (where tether wire would be stored) was calculated 
+as shown below. 
+Outer spool radius: ro = 0.04 m 
+Inner spool radius: ri = 0.01 m 
+Reel length: hr = 0.15 m 
+Reel volume: 𝑉௥ = 𝜋 ∗ 𝑟௥௢
+ଶ ∗ ℎ௥ − 𝜋 ∗ 𝑟௥௜
+ଶ ∗ ℎ௥
+ = 𝜋 ∗ (0.04 m)ଶ ∗ 0.15 m − 𝜋 ∗ (0.01 m)ଶ ∗ 0.15 m 
+= 7.0686 x 10-4 m3
+With the spool volume known, the maximum length of the tether wire that could be stored in that space 
+was calculated by setting the volume of the spool equal to the volume of the wire and solving for the length of 
+the wire. 
+Wire volume: 𝑉௪ = 𝜋 ∗ 𝑟௪
+ଶ ∗ 𝑙௪ = 𝑉௥
+Wire radius: rw = (dw/2) = (2.05 mm/2) = 1.025 mm 
+Wire length: 𝑙௪ =
+௏ೢ
+గ∗௥ೢ
+మ =
+௏ೝ
+గ∗௥ೢ
+మ = (7.0686 x 10-4 m3)/( 𝜋(1.025 mm * 10-3 m/mm)2) = 214.16 m
+The calculation showed that the spool would be able to store well over 150 meters of the selected tether 
+wire. Only 155 meters of wire were necessary to keep (150 meters for Martian gravity, plus an extra 5 meters 
+on the spool for safety and reducing stress at the connection point inside the spool), and therefore, the extra 
+wire length was converted to a percentage packing factor with the calculations below. 
+Packing Factor: % PF = %𝑃𝐹 = 
+௟ೢିଵହହ
+ଵହହ
+∗ 100 = ଶଵସ.ଵ଺ ୫ ିଵହହ
+ଵହହ
+∗ 100 = 38.17 %
+ Therefore, the final calculated amount of tether wire that the spool could store was 155 meters with a 
+38.17% packing factor. 
+Artificial gravity 
+The centripetal acceleration formula was manipulated to find the angular velocity given a known radius of 
+75 meters between satellites and a desired artificial gravity of 0.166 g, which is approximately 1.6279 m/s. The 
+angular velocity was then converted to RPM from rad/s [11 ]. 
+𝑎௖ = 𝜔
+ଶ𝑟
+𝜔 = ට
+𝑎௖
+𝑟
+
+41 
+𝜔 = ඨ
+1.6279
+75 = 0.147 rad/s
+𝑛 = 
+𝜔
+2𝜋 ∗ 60
+𝑛 = 
+0.147
+2𝜋 ∗ 60 = 𝟏. 𝟒𝟎 𝐑𝐏𝐌
+ 
+Level wind bidirectional thread pitch 
+The level wind bidirectional thread needs to have a thread pitch that, despite being driven with a 5:1 gear 
+ratio, only moves the carriage over 1 wire diameter per rotation of the spool to ensure the tightest possible 
+packing factor. With a known wire diameter of 2.05mm, the pitch can be calculated. 
+1 spool rotation = 5 level wind rotations 
+5 rotations → linear travel of single diameter of wire = 2.05 mm 
+𝑡ℎ𝑟𝑒𝑎𝑑 𝑝𝑖𝑡𝑐ℎ = 
+2.05 mm
+5
+= 𝟎. 𝟒𝟏 𝐦𝐦
+Frame Rod Analysis 
+The 3U CubeSat frame is made up of four OTS rectangular rods made from Aluminum 6061 T-6. Based on 
+the positioning of the frame within the total CubeSat, these rods are mounted perpendicular to the launch 
+direction, meaning a distributed launch force acts on each rod individually. This launch load can be modeled 
+in the diagram below. 
+Figure 7.1.1: Launch Load Frame Rod FBD 
+A launch force of 6g was chosen as a conservative estimate of the force acting on the CubeSat system as 
+the satellite is launched into low Earth orbit. The force acting upon each rod is detailed in the calculations 
+below. 
+𝐹Launch = 𝑚𝑎 = 𝑚ଷ௎ ௌ௬௦௧௘௠ × 6𝑔
+
+42 
+𝐹Launch = (3 kg)(6 × 9.81 m/sଶ) = 176.58 N 
+𝐹௥௢ௗ, ௟௔௨௡௖௛ =
+176.58𝑁
+4 𝑟𝑜𝑑𝑠 = 44.145 N/rod 
+There are two stresses acting upon the rods during launch, axial and bending. The combined stress is the 
+total stress of both the axial and bending stress that each rod experiences and combines to be a tensile stress. 
+The combined stress is directly compared to the yield strength of Aluminum 6061 T-6 to determine a factor of 
+safety, which gauges the likelihood of failure of each rod during launch. These calculations are provided below. 
+𝜎௔௫௜௔௟ =
+𝐹௥௢ௗ, ௟௔௨௡௖௛
+𝐴௖,௥௢ௗ
+𝜎௔௫௜௔௟ =
+44.145 𝑁
+(5mm)(5mm) = 1.77 MPa
+𝜎௕ =
+𝑀𝑐
+𝐼
+𝜎௕ =
+(44.145N × 0.01m) ቀ
+0.005m
+2
+ቁ
+5.208 × 10ିଵଵmସ = 21.2 MPa 
+𝜎௖௢௠௕௜௡௘ௗ = 𝜎௔௫௜௔௟ + 𝜎௕ = 1.77 MPa + 21.2 MPa = 𝟐𝟐. 𝟗𝟕 𝐌𝐏𝐚
+𝑌𝑖𝑒𝑙𝑑 𝑆𝑡𝑟𝑒𝑛𝑔𝑡ℎ 𝑜𝑓 𝐴𝑙 6061 − 𝑇6 = 275 MPa
+𝐹𝑂𝑆௧௘௡௦௜௟௘ =
+275𝑀𝑃𝑎
+22.97𝑀𝑃𝑎 = 𝟏𝟐. 𝟎
+𝑀𝑂𝑆௧௘௡௦௜௟௘ =
+𝐹𝑂𝑆௧௘௡௦௜௟௘ − 1
+1
+=
+12.0 − 1
+1
+= 𝟓. 𝟎
+Based on the calculations, a FOS of 12.0 and a MOS of 5.0 were calculated, which were determined to be 
+high enough to assume that the rods that make up the 3U Talon Tether System frame will not fail during launch 
+of the satellite system. 
+Bolt and Joint Analysis 
+On the 3U CubeSAT frame, a total of 8 bolts were used to thread into 4 rectangular cross-section aluminum 
+6064-T1 rods. The bolts chosen to be used were M3 X 0.5 Class 12.9 Alloy Steel bolts [2] because that size 
+would allow for a 1 mm wall thickness from the thread in the bars. Designed to a factor of safety of 1.2, the 
+necessary pre-load and tightening torque of each bolt was calculated. The analysis was completed assuming 
+a preload target of an engineering standard of 70% of the yield strength. Each bolt is assumed to be in pure 
+tension, with no temperature-induced relaxation as well, with the threads fully engaged. Possible failure 
+modes from these bolts were considered to be failure in shear, failure from thread stripping, or tensile failure 
+due to over-tightening. A section view of the frame with the bolts is shown in Figure 7.1.2, with a free body 
+diagram of the frame bolt shown in Figure 7.1.3. 
+
+43 
+Figure 7.1.2: Section View of The 3U Frame with Bolts Threading Into The Rod 
+Figure 7.1.3: Free Body Diagram of The Bolt 
+Yield Strength (σy) = 1080 MPa
+Diameter (d) = 3 mm = 0.003 m 
+Preload Fraction (f ) = 0.7 (70%) 
+Torque Coefficient (K) = 0.20 
+Tensile Stress Area (As) = 5.03 mm2 
+Preload Force: F0 = f* σy*As = 0.7*1080 MPa*5.03 mm2 = 3810 N 
+Tightening Torque: T = K*F0*d = 0.20*3810 N*0.003 m = 2.286 Nm or 20 in-lbs.
+Each bolt was 8 mm long with a nominal diameter of 3 mm and a weight of about 0.52 g per bolt. A realized 
+factor of safety as well as a margin of safety of 1.42 and 0.18 were found, proving the design and bolt choice to 
+be safe. 
+Bolt Strength at Yield 
+F(yield) = σy*As = 1080 MPa*5.03 mm2 = 5432 N 
+RFOS = 
+ி(௬௜௘௟ௗ)
+ி଴
+ = 
+ହସଷଶ
+ଵ଴଼଴
+ = 1.42
+MOS = 
+ோிைௌ
+஽ிைௌ
+− 1 = ଵ.ସଶ
+ଵ.ଶ
+− 1 = 𝟎. 𝟏𝟖
+
+44 
+Maximum Expected Tether Tension 
+To verify that the selected tether material and diameter satisfy the structural requirements of the mission, 
+the tension in the tether was evaluated using a free-body diagram (FBD) in the deployed configuration. The 
+tether was modeled as a flexible member transmitting axial force between the daughter and mother satellites. 
+External forces acting on the system include a gravitational gradient, relative orbital motion, and the restoring 
+force generated by the reel assembly. For sizing the tether, the dominant load was assumed to be the 
+centripetal force required to maintain the daughter satellite at its maximum deployed radius of 150 meters. 
+Dynamic effects, such as oscillations and transient deployment loads, were treated separately using safety 
+factors. Due to the exact mass of each satellite being unknown, with the client providing 24 kg as an estimate, 
+the tether was designed under the worst-case assumption that the mother satellite would be 50% heavier than 
+the daughter satellite. 
+Figure 7.1.4: Free Body Diagram of The Tether 
+First, Newton’s second law was applied in the radial direction. The tether force was assumed to act along 
+the center of mass of both satellites, and the satellite’s motion was approximated as circular relative to the 
+system center of mass. The required tether tension is therefore given by the mass of the daughter satellite 
+multiplied by its radial acceleration. Additional contributions from the mass of the tether itself were included 
+as secondary terms using the same methodology. 
+Figure 7.1.5: Satellite System Model 
+
+45 
+After deriving the general tension expression, numerical values corresponding to the system geometry, 
+satellite mass, and deployment radius were substituted. A factor of safety consistent with the Product Design 
+Specifications was applied to account for uncertainties in loading, manufacturing variability, and 
+environmental degradation throughout the six-month mission in low Earth orbit. The resulting required 
+minimum breaking load was then compared to the tensile capacity of aluminum 5056 wire for the selected 
+diameter. 
+𝑚ଵ = 36 kg
+𝑚ଶ = 24 kg
+The density of aluminum 5056 was found to be [1] 
+𝜌 = 2640 
+kg
+mଷ
+The wire was sized down from the maximum allowable size to satisfy the 3U volume constraint. 
+𝑑 = 2.05 mm
+The yield strength for aluminum 5056 was found by linearly interpolating the data found in [1] to find the 
+yield strength at 80˚C. 
+𝜎௬ = 135.2 MPa
+𝑟ଵ + 𝑟ଶ = 150 m
+𝑅 =
+𝑚ଵ𝑟ଵ + 𝑚ଶ𝑟ଶ
+𝑚ଵ + 𝑚ଶ
+𝑟ଶ = 𝑅 =
+𝑚ଶ(𝑟ଵ + 𝑟ଶ)
+𝑚ଵ + 𝑚ଶ
+= 90 m
+𝑟ଵ = 150 m − 90 m = 60 m
+The angular velocity in this case is different for each satellite due to the assumption that the masses are 
+unequal; for this calculation, satellite 1 is considered. 
+𝜔 = ඨ
+1.6279
+60 = 0.164 rad/s
+The linear density of the wire was then found. 
+𝜆 =
+𝜌𝜋𝑑ଶ
+4
+= 0.0087 
+kg
+m
+For the purposes of sizing the tether, the more complete system model incorporating the tether mass 
+effects was used. 
+𝑇 = 𝑚ଵ𝜔
+ଶ𝑟ଵ
+ + ଵ
+ଶ
+𝜆𝜔ଶ(𝑟ଶ
+ଶ − 𝑟ଵଶ) = 𝟓𝟖. 𝟖 N
+
+46 
+For the purposes of sizing other components, such as the reel, a simplified tension equation considering 
+only centripetal acceleration effects was used. 
+𝑇 = 𝑚ଵ𝜔
+ଶ𝑟ଵ = 𝟓𝟖. 𝟑 𝐍 
+𝐴 =
+𝜋
+4
+𝑑
+ଶ = 3.3𝐸 − 6 mଶ
+𝜎 =
+𝑇
+𝐴
+= 17.81 MPa
+𝑅𝐹𝑂𝑆 =
+𝜎௬
+𝜎
+= 𝟕. 𝟓𝟗
+With a design factor of safety of 2, the resulting MOS was found. 
+𝑀𝑂𝑆 =
+𝐹𝑂𝑆
+𝐷𝐹𝑂𝑆 − 1 = 𝟐. 𝟖
+Tether Material Selection 
+To establish the allowable material density for the tether, a maximum system mass of 2.5 kg, a total tether 
+length of 155 m, and a wire diameter of 2.05 mm were used. These constraints yield a maximum permissible 
+density of approximately 4886 kg/m³ for the tether material. In addition to mass limitations, the material is 
+required to withstand temperatures up to at least 120 °C and as low as −150 °C while maintaining adequate 
+electrical conductivity for system operation. With these mechanical, thermal, and electrical constraints 
+defined, a tensile-strength-versus-density plot was generated in Ansys Granta to identify candidate materials 
+that satisfy both the mass limit and the required environmental performance. 
+Figure 7.1.6: ANSYS Tether Material Density Vs. 𝝈𝒚 Plot 
+
+47 
+For the tether, the constraints called for something light, strong, conductive, and stable in LEO 
+temperatures without embrittlement. That mostly limited possibilities to aluminum-based alloys. Within the 
+aluminum family, the 5000 series is ideal because the magnesium alloying provides strain hardening and 
+environmental resistance. 5056 was selected specifically because it has one of the highest yield strengths in 
+the 5000s family, and it’s commonly used for high-strength wire rope. 
+Motor Torque Calculation 
+ This calculation evaluates whether the reel motor can safely withstand the maximum expected tether load. 
+The worst-case tension is applied at the reel radius to determine required torque, then the motor’s effective 
+output is found using the gearbox ratio and an assumed efficiency. Comparing these values yields the Factor 
+of Safety and Margin of Safety for the design. 
+Figure 7.1.6: Reel Free Body Diagram 
+The maximum possible tension on the tether was calculated assuming a worst-case scenario where the 
+mother satellite is 50% heavier than the daughter satellite. The following variables were defined for this 
+calculation. 
+Force from tether tension: 𝐹 = 𝐹௠௔௫ = 58.3 N
+Reel axle radius: 𝑟 = 10 mm
+Listed Stepper Motor Holding Torque: 0.343 N ∙ m
+Planetary Gearbox Ration: 5.18: 1
+The maximum possible torque exerted on the spool, Tmax, and the maximum torque the motor could apply 
+without stalling, Tmax,motor , with an 80% efficiency applied, were calculated as shown below. 
+𝑇௠௔௫ = 𝐹௠௔௫ ∗ 𝑟 = 58.3 N ∗ 0.01 = 𝟎. 𝟓𝟖 𝐍𝐦
+𝑇௠௔௫,௠௢௧௢௥ = 0.343 Nm ∗ 5.18 ∗ 0.8 = 𝟏. 𝟒𝟒 𝐍𝐦
+ 
+Based on the results above, the factor of safety and margin of safety were solved for with a design factor 
+of safety of 2. 
+
+48 
+𝐹. 𝑂. 𝑆 =
+𝑇௠௔௫,௠௢௧௢௥
+𝑇௠௔௫
+=
+1.44
+0.58 = 𝟐. 𝟒𝟖
+𝑀. 𝑂. 𝑆 =
+F. O. S
+𝐷. 𝐹. 𝑂. 𝑆 − 1 =
+2.48
+2
+− 1 = 𝟎. 𝟐𝟒
+Reel Stress Calculation 
+This calculation assesses whether the reel support beam can safely withstand the maximum applied load 
+during operation. Using the free-body diagram (Figure 7.1.7 and 7.1.8) and the resulting shear-moment 
+diagram (Figure 7.1.9 and 7.1.10), the peak bending moment at mid-span is identified and combined with the 
+beam’s geometry to determine bending stress. Comparing this stress to the yield strength of 6061-T6 
+aluminum then provides the Factor of Safety and Margin of Safety for the design. 
+Figure 7.1.7: Reel Free Body Diagram (Side View)
+Figure 7.1.8: Reel Free Body Diagram (Front View) 
+Radius is 10mm, length is 150mm, maximum force is 58.3 N, and it is in the middle, and the design factor 
+of Safety is 2. Using a free-body diagram, a shear-moment diagram can be created: 
+
+49 
+Figure 7.1.9: Reel Shear Force Diagram
+Figure 7.1.10: Reel Bending Moment Diagram 
+The diagrams revealed that the maximum moment occurs at the center of the spool axle and has a magnitude 
+of 2.19 Nm. The Moment of Inertia and maximum bending stress was then calculated as shown below. 
+𝐼 =
+𝜋
+4
+𝑟
+ସ =
+𝜋
+4
+(0.010)
+ସ = 7.85 ∗ 10ିଽ mସ
+𝜎௠௔௫ =
+𝑀𝑐
+𝐼
+=
+𝑀 ∗ 𝑟
+𝐼
+=
+2.19Nm ∗ (0.010 m)
+7.85 ∗ 10ିଽ mସ = 𝟐. 𝟕𝟖 𝐌𝐏𝐚
+The spool is made of 6061-T6 Aluminum, which has a yield stress of 276 MPa. Based off this information and 
+the calculated maximum stress, the Factor of Safety and Margin of Safety were calculated as shown below. 
+𝐹𝑂𝑆 =
+𝜎௬
+𝜎௠௔௫
+=
+276
+2.78 = 𝟗𝟗. 𝟏𝟒
+𝑀𝑂𝑆 =
+𝐹𝑂𝑆
+𝐷𝑒𝑠𝑖𝑔𝑛 𝐹𝑂𝑆 − 1 =
+99.14
+2
+− 1 = 𝟒𝟖. 𝟓𝟕
+
+50 
+Table 7.1.11: Factor and Margin of Safety Summary
+Component Part # Critical 
+Case 
+Material 
+Selection 
+Final 
+Geometry 
+Design 
+FOS 
+Realized 
+FOS MOS 
+Tether T-CW-OTS002 Tension Aluminum 
+5056-H18 
+155m X D 
+2.05mm 2 7.59 2.8 
+Spool R-001 Bending Aluminum 
+6061-T6 
+160 X R 
+84mm 2 99.14 48.57 
+Motor R-MC-OTS- Stalling N/A 87.3 X 42.3 X 
+42 mm 2 2.48 0.24 
+3U Frame 
+Bar 
+F-MC-OTS001 Bending Aluminum 
+6064-T1 
+294 X 5 X 5 
+mm 
+2 12 5 
+Frame Bolts F-MC-OTS004 Tension 
+ANSI 4137 
+Stainless 
+Steel 
+M3 X 0.5mm 2 1.42 0.18 
+
+51 
+7.2 Design Prototyping 
+The initial design prototype was created entirely in CAD, then the necessary files were converted to STL 
+mesh files for 3D printing. All OTS parts were ordered from vendors, and custom parts were printed via FDM 
+3D printing technology. 3D printing can be a very useful tool for confirming fitment and assembly; however, 
+there are limitations that need to be considered. Some parts needed to be temporarily modified from the final 
+design to allow for 3D printing so that other interfaces could still be checked. 
+Unlike the final design, all mounts were merged with the floor of the satellite into one body for ease of 
+prototype assembly and to reduce the need for additional fasteners. Also, the OTS motor was not available 
+easily, so a custom hand crank part was created to take the place of the motor and allow for spool rotation. 
+The bidirectional threaded rod proved to be a challenge to replicate, as the final part would be 
+manufactured on a precision lathe out of metal, and printing a fine threaded rod is a challenge for FDM 3D 
+printing. This required that a simplified version of the threaded rod be created to allow for fitment and 
+movement checks despite the thread pitch not being accurate to the final design. In addition to this, the only 
+reliable way to print a thin and strong threaded rod is to split it in half and print both halves separately. Both 
+halves can be glued together after printing, but with the tolerances of 3D printing, this can sometimes lead to 
+an imperfect thread and coarse movement. Despite these challenges, the prototype was assembled with an 
+accurate appearance to the CAD model as shown in figure 7.2.1 below. 
+Figure 7.2.1: Prototype of Talon Tether System 
+Instead of the selected Aluminum 5056-H18 tether wire, string was used in this prototype to connect the 
+two frames together. As previously stated, all custom components were 3D printed as seen by the white 
+material, while all OTS parts were accurate to what would be used in the real product. The prototype worked 
+
+52 
+as intended except for the level wind subsystem. The carriage was not meshing well with the double threaded 
+rod which prevented it from translating as the spool rotated. This was due to the limited dimensional accuracy 
+that came with using a 3D printer for a part that needed to have high precision and accuracy to properly 
+function. Overall, the prototyping process confirmed that the design was structurally sound and functioned as 
+intended, and that the double threaded rod and carriage of the level wind would be the most difficult custom 
+parts to manufacture, requiring high dimensional accuracy and precision.
+
+53 
+8 Deliver Phase: Design for X 
+8.1 Design for Reliability 
+Ensuring the tether deployment system performs reliably under all conditions requires identifying where 
+potential weaknesses may occur and addressing them early in the design phase. The DFMEA process serves 
+this purpose by systematically examining each subsystem, predicting possible failure modes, and evaluating 
+their consequences on overall mission performance. For this analysis, the tether system was divided into its 
+main components: the tether root clamp and spool assembly, motor and bearing supports, level-wind 
+mechanism and gears, emergency brake system, electronics and control hardware, tether outlet and wiring, 
+inline load cell and clamp block, and the electron emitter subsystem. Each component was analyzed for how 
+it could fail, why those failures might occur, and what effects they would have on system operation. Table 8.1.1 
+presents the results of this evaluation, detailing each failure mode along with its cause, effect, and ranking 
+according to four key criteria: Severity (S), Occurrence (O), Detection (D), and the Risk Priority, which are all 
+defined below. 
+1. Severity (S): Rates the seriousness of the effect of a failure on system performance on a scale from 1 
+(no effect) to 10 (catastrophic failure or mission loss). 
+2. Occurrence (O): Estimates the likelihood that a specific failure will happen, rated from 1 (rare or 
+unlikely) to 10 (highly probable or frequent). 
+3. Detection (D): Measures the ability to detect a failure before it causes harm, scored from 1 (easily 
+detected) to 10 (undetectable before failure). 
+4. Risk Priority Number (RPN): A calculated value determined by RPN = S × O × D, used to prioritize 
+failure modes by combining their severity, likelihood, and detectability. 
+Table 8.1.1: Design Failure Modes and Effects Analysis (DFMEA) 
+Component Failure Mode Effect Cause S O D RPN Recommended 
+Action 
+Tether Spool 
+Clamp (Bolt) 
+Clamp slip or 
+splice pull-out 
+Loss of tether 
+attachment, 
+mission loss, 
+debris 
+Insufficient 
+clamp preload, 
+bolt loosening, 
+vibration 
+9 3 4 108 
+Proof-test splice 
+with 2x max load 
+and vibration 
+tests 
+Spool Axle & 
+Bearing 
+Interface 
+Bearing 
+seizure/ notch 
+wear 
+Payout jam, 
+stepper stall, 
+tether break 
+Lubricant loss, 
+misalignment, 
+high radial load 
+8 5 4 160 
+Use vacuumrated bearings, 
+life cycle tests, 
+torque monitor 
+Level Wind 
+Carriage & 
+Double 
+Threaded 
+Rod 
+Rod binding or 
+carriage jam 
+Uneven wire 
+distribution, 
+abrasion, spool 
+jam 
+Misalignment, 
+debris, 
+inadequate 
+clearances 
+7 4 5 140 
+Hardened guides, 
+bench cycle 
+vibration test 
+
+54 
+Level Wind 
+& Spool Gear 
+Connection 
+Gear tooth 
+failure/slip 
+Level wind 
+stops, 
+bunching, 
+abrasion, jam 
+Shock during 
+launch, 
+overload, poor 
+material 
+7 4 5 140 
+Hardened gear 
+material, torque 
+monitoring 
+Stepper 
+motor & 
+gearbox 
+Motor stall, too 
+much current, 
+gearbox 
+damage 
+Loss of 
+controlled 
+payout, cannot 
+retract 
+Overload 
+events, 
+overheating, 
+radiation upset 
+8 3 3 72 
+Motor current 
+monitor, shearprotection, 
+thermal test 
+Servo 
+emergency 
+locking 
+mechanism 
+Fails to actuate 
+/ false engage 
+Cannot stop 
+payout on fault, 
+cannot deploy 
+if stuck 
+Power loss, 
+actuator failure 8 3 4 96 
+Design fail-safe 
+mode or 
+redundant 
+actuation 
+Inline load 
+cell & clamp 
+block 
+Sensor drift, 
+clamp slip, 
+connector open 
+Incorrect 
+tension readout, 
+slack or overtension 
+Radiation, 
+overload, 
+wiring failure, 
+thermal drift 
+8 3 4 96 
+Redundant 
+tension sensing, 
+EMI shielding 
+Electron 
+emitter & 
+xenon tank 
+Emitter stuck, 
+gas leak, 
+orifice 
+contamination 
+No charge 
+bleed, charge 
+build-up, arcing 
+Valve failure, 
+tubing kink, 
+contamination 
+7 3 5 105 
+Plasma-chamber 
+test, 
+pressure/flow 
+telemetry 
+Ceramic 
+feed-through 
+outlet 
+Crack / sharp 
+edge wear, 
+insulation 
+damage 
+Tether 
+insulation 
+failure, HV 
+leakage, 
+Thermal 
+cycling, shock, 
+sharp edges 
+9 2 4 72 
+Use spacequalified 
+ceramic, 
+abrasion test 
+CPU / 
+Control 
+electronics 
+Software bug 
+or SEU causes 
+bad command 
+Runaway 
+payout, brake 
+not actuated, 
+telemetry loss 
+Software 
+defect, poor 
+state validation 
+9 3 3 81 
+Hardened statemachine, ECC or 
+fault-tolerant 
+MCU 
+Table 8.1.2: Recommended Actions DFMEA 
+Recommended 
+Action Actions Taken / Planned S O D RPN 
+Seal bearings & 
+add torque monitor 
+Specify vacuum-rated sealed bearings; add torque/current threshold 
+alarm to CPU; schedule life test 8 3 3 72 
+Redundant tension 
+sensing 
+Add reel-torque estimation + inline load cell cross-check; implement 
+in-flight calibration algorithm 8 2 3 48 
+Torque-limited 
+coupling (protect 
+gears & motor) 
+Add shear-clutch or compliant coupling between motor and spool; 
+bench test trip point 7 2 3 42 
+
+55 
+Emitter telemetry 
+& backup bleed 
+mode 
+Add pressure/flow sensor on xenon line; implement passive bleed 
+fallback if emitter offline 7 2 4 56 
+Autonomous safestow on comms 
+loss 
+Implement state-machine: if comms lost & tension out-of-range then 
+engage brake & retract staging; test in HW-in-loop 8 2 3 48 
+` 
+
+56 
+8.2 Design for Environmental Factors 
+Because the satellite system will be subject to harsh environmental conditions, whether during launch or 
+while orbiting Earth, designing a system that can not only withstand but also perform at a high level is an 
+integral consideration when prototyping and implementing the design. 
+ Considering launch initially, the satellite must be able to withstand acceleration loads, such as lateral g’s, 
+during launch as well as random vibrations. As the satellite is launched, it will shake violently. Structural and 
+non-structural parts in the tether system must avoid loosening, cracking, or failure via random vibration. 
+Acoustic-induced stress is also a useful consideration because when the rocket is launching, engines and 
+airflow create high sound pressure that can shake, vibrate, and damage delicate parts. During rocket 
+separation, a phenomenon called pyro shock occurs when explosive bolts or springs create a strong, quick 
+shock wave, causing a massive force equivalent to thousands of g’s. Circuit boards and connectors in the 
+tether system are especially at risk of being damaged or failing due to pyro shock. 
+ As the system approaches low Earth orbit, new, harsh environmental factors come into play. Atomic oxygen 
+aggressively erodes polymers/coatings and roughens surfaces; rapid day–night thermal cycling (≈ −120 °C to 
++120 °C) drives fatigue, CTE-mismatch stress, and tether length changes; trapped radiation (TID/SEE) 
+degrades electronics; the ionospheric plasma causes surface charging, arcing risk, and EMI/EMC issues, 
+especially around long conductors like tethers. Free-molecular aerodynamic drag is significant and variable 
+with solar activity, affecting attitude, tether tension, and orbit decay. Micrometeoroid-and-debris (MMOD) 
+impacts threaten thin structures and lines, motivating multi-filament or shielded designs. UV darkening and 
+AO together accelerate material aging. Finally, Earth’s magnetic field interacts with currents in long 
+conductors, inducing voltages/torques (useful for electrodynamic tethers but also a control and power-budget 
+driver). Designing for LEO means choosing AO/UV-resistant materials, controlling charging paths, sizing 
+thermal control and drag margins, and verifying MMOD tolerance and end-of-life performance. 
+Upon re-entry of Earth’s atmosphere after the 6-month lifespan of the satellite system, the remnants of the 
+satellite system will land at Point Nemo, a remote section of sea in the South Pacific Ocean. The tether system 
+is constructed from non-hazardous and non-poisonous materials to mitigate the risk of polluting the ocean 
+environment where the satellite will land. 
+
+57 
+8.3 Design for Maintainability 
+Unfortunately, in-orbit repair is not possible, so it is critical to focus on ease of assembly/disassembly and 
+making sure the mechanical components are properly maintained. It is also important to account for 
+maintainability in failure modes and ground maintainability before launch. While those aspects are the most 
+essential, there are many other factors that need to be accounted for. Fortunately, the tether deployment 
+system was designed with maintainability in mind to simplify ground assembly, integration, and testing prior 
+to launch. The design utilizes standardized fasteners, labeled quick-disconnects, and accessible mounting 
+points to ensure that tools can reach critical areas and that parts can be replaced or adjusted with minimal 
+disassembly. The inclusion of a ball bearing support and a detachable spool mount facilitates easy 
+replacement of wear-prone components, while consistent use of mechanical interfaces such as alignment 
+pins and standardized screw types minimizes reassembly errors. Electrical connections for the stepper motor, 
+servo brake, and load cell are routed through organized harnesses with labeled connectors to streamline 
+inspection and diagnostics. 
+The table below lists which parts can be removed and replaced relatively easily if needed during 
+testing/prototyping. While every part is removable, the ones labelled “No” indicate that they would require 
+the removal of several other parts to get to. The last column lists whether a part is off the shelf (OTS). 
+Table 8.3.1: Design for Maintainability 
+Subsystem Component Removable OTS 
+Reel Subsystem 
+Stepper Motor Yes Yes 
+Right Reel Mount No No 
+Spool No No 
+Ball Bearing No Yes 
+Left Reel Mount No No 
+MicroServo Reel Lock Yes yes 
+Level Wind Subsystem 
+Carriage No No 
+Bidirectional Threaded Rod No No 
+Bearings Yes Yes 
+Alignment Rod Yes Yes 
+Bearing Mounts Yes No 
+Drive Gear No No 
+Alignment Key Yes Yes 
+E-clip Yes Yes 
+Mount Yes No 
+
+58 
+Tether Attachment 
+Subsystem 
+Load Cell No Yes 
+Tether No Yes 
+Upper Clamp Block Yes No 
+Lower Clamp Block Yes No 
+Electron Emitter 
+Subsystem 
+Electron Emitter Yes Yes 
+Xenon Tank/Mount Yes Yes 
+
+59 
+8.4 Design for Economic Factors 
+The design of the tether system has been developed with consideration of economic factors that influence 
+both material selection and manufacturability. While the system is primarily driven by functional and 
+performance requirements rather than consumer market dynamics, economic considerations remain critical 
+to ensure cost-effectiveness and feasibility within the context of academic and small satellite missions. 
+The use of standardized CubeSat architectures, specifically a 3U frame to fit within the primary satellite 
+and a 1U frame for the secondary unit, provides significant economic advantages. This configuration leverages 
+the well-established CubeSat ecosystem, which reduces development and integration costs by enabling 
+compatibility with standardized deployment systems and allowing for less development in integrating the 
+tether system with the rest of the satellite. 
+Material selection was guided by a balance between performance, cost, and manufacturability. Aluminum 
+was chosen for the primary structural elements, including mounts, gears, and the spool, due to its favorable 
+strength-to-weight ratio, ease of machining, and cost efficiency. Stainless steel is utilized selectively for small, 
+high-stress components such as the reel lock mechanism to ensure reliability without incurring excessive 
+material expenses. 
+The incorporation of stepper and servo motors, both widely available and cost-effective components, 
+further supports economic sustainability. These mass-produced parts offer consistent performance at low 
+cost while simplifying sourcing and maintenance. Additionally, the modular design of the tether deployment 
+system featuring a spool, level-wind mechanism, and integrated electronics on a hardware faceted mounting 
+system within the CubeSats facilitates streamlined assembly, scalability, and potential reusability in future 
+iterations. 
+Although the tether system is not directly affected by fluctuations in consumer economic systems, it is 
+indirectly influenced by global supply chain conditions within the aerospace and electronics sectors. The 
+availability and pricing of components such as xenon tanks and electron emitters may vary based on 
+manufacturing trends, material costs, and technological development. To mitigate these risks, the design 
+emphasizes the use of more standardized, readily available components that can be substituted with 
+equivalent alternatives, if necessary, rather than custom-built parts. 
+In conclusion, while the design of the tether system is primarily governed by technical and operational 
+requirements, careful consideration has been given to economic factors to ensure the system remains costefficient, manufacturable, and sustainable within the financial constraints typical of small satellite missions. 
+
+60 
+8.5 Ethical Considerations 
+All the design engineers involved in this project adhered to the standards of the American Society of 
+Mechanical Engineers (ASME) Code of Ethics of Engineers, including the 10 fundamental canons. The 
+fundamental principles of this document are the following: 
+Engineers uphold and advance the integrity, honor, and dignity of the engineering profession by: 
+I. using their knowledge and skill for the enhancement of human welfare; 
+II. being honest and impartial, and serving with fidelity their clients (including their employers) and 
+the public; and 
+III. striving to increase the competence and prestige of the engineering profession. 
+This tether system is designed to comply with international space regulations to minimize the risk of 
+generating space debris. Each component and subsystem (spool, level wind, ceramic outlet, emergency 
+brake, etc.) was designed to prevent fragmentation or an uncontrolled, dragging tether. Materials were used to 
+avoid shedding, sharp-edge abrasion of the wire, and hazardous ground test practices, as well as to ensure 
+long-term durability. Additionally, components such as the emergency brake system were integrated into the 
+system to provide redundancy. There are no conflicts of interest between the design team and the international 
+space regulations. 
+
+61 
+9 Deliver Phase: Manufacturing and Cost Model 
+9.1 Manufacturing Process Tables 
+A manufacturing process table was developed for each custom part listed on the Bill of Materials. The 
+tables below include a brief description of each manufacturing process used and the corresponding estimated 
+time, quantity, and total time in both minutes and hours. The title of each table denotes what part it 
+corresponds to, and below each table is a manufacturing cost estimate based on the total manufacturing time. 
+Table 9.1.1: Frame Cap Manufacturing Process
+Manufacturing Process 
+Est. Time 
+[Min] 
+QTY 
+Total Time 
+[Min] 
+Total Time [Hr] 
+Cut raw stock for plates (Bandsaw) 5 4 20 0.33
+Load stock into CNC machine 3 4 12 0.2
+Probe Stock 5 4 20 0.33
+Run facing operation 0.5 4 2 0.033
+Run adaptive clearing operation 1 4 4 0.066
+Run corner drilling operation 0.2 4 0.8 0.013
+Run 2D pocket operation 1 4 4 0.066
+Run 2D contour OP 1 0.5 4 2 0.033
+Run 2D contour OP 2 0.5 4 2 0.033
+Remove part from machine 2 4 8 0.133
+Break all edges (Hand Files) 5 4 20 0.33
+Total Time [Hr]: 1.57
+ 
+Assuming a labor cost of $15/hr and 1.57 hours to complete, the estimated cost of manufacturing for the 
+frame cap is $23.55. 
+Table 9.1.2: Right Reel Mount Manufacturing Process
+Manufacturing Process 
+Est. Time 
+[Min] 
+QTY 
+Total Time 
+[Min] 
+Total Time [Hr] 
+Cut blank from 2.5 mm 6061 Sheet 5 1 5 0.0833
+Profile cut part on waterjet 5 1 5 0.0833
+
+62 
+Press-brake 90° bend 5 1 5 0.0833
+CNC mill 3.25mm hole 10 4 40 0.6666
+CNC bore 22.5mm hole 10 1 10 0.1667
+CNC mill 3.3 mm hole 10 2 20 0.1667
+Deburr all edges and holes 2 4 8 0.25
+Total Time [Hr]: 1.50
+ 
+Assuming a labor cost of $15/hr and 1.50 hours to complete, the estimated cost of manufacturing for the 
+right reel mount is $22.50. 
+Table 9.1.3: Spool Manufacturing Process
+Manufacturing Process 
+Est. Time 
+[Min] 
+QTY 
+Total Time 
+[Min] 
+Total Time [Hr] 
+Circular Disk (Right End of Spool)
+Cut 82.55 mm rod stock 5 1 5 0.0833
+Turning pass on lathe down to 80 mm 10 1 10 0.1667
+Facing pass on lathe down to 5 mm 10 1 10 0.1667
+Axle (Middle of Spool)
+Cut 22.225 mm rod stock 5 1 5 0.0833
+Turning pass on lathe down to 20 mm 10 1 10 0.1667
+Facing pass on lathe down to 150 mm 10 1 10 0.1667
+Drill radial 5 mm hole (15.5 mm depth) 10 1 10 0.1667
+Spur Gear (Left End of Spool) 1
+Waterjet cut 84 mm diameter gear blank 15 1 15 0.25
+CNC bore 21 mm hole (4 mm depth) 20 1 20 0.3333
+CNC mill 40 teeth on gear blank 80 1 80 1.3333
+Full Spool
+Weld circular disk to right end of axle 15 1 15 0.25
+Weld spur gear to left end of axle 15 1 15 0.25
+Drill axial 5 mm hole (20 mm depth) 10 1 10 0.1667
+CNC mill axial D hole (20 mm depth) 25 1 25 0.4167
+Drill 4 mm axial hole (8.5 mm depth) 10 1 10 0.1667
+
+63 
+Tap threads into 4 mm hole (8 mm depth) 20 1 20 0.3333
+Deburr sharp edges 15 1 15 0.25
+Total Time [Hr]: 4.75
+ 
+Assuming a labor cost of $15/hr and 4.75 hours to complete, the estimated cost of manufacturing for the 
+spool is $71.25. 
+Table 9.1.4: Left Reel Mount Manufacturing Process
+Manufacturing Process 
+Est. Time 
+[Min] 
+QTY 
+Total Time 
+[Min] 
+Total Time [Hr] 
+CNC fiber laser cut all plates and tabs 20 1 20 0.333
+Bend main plate 90 degrees 5 1 4 0.067
+Position and tack weld servo mount tabs 3 2 6 0.100
+TIG weld servo mount tabs 5 2 10 0.167
+Cut length from aluminum tube (bandsaw) 2 1 2 0.033
+Face aluminum tube (Mill) 4 1 4 0.067
+Position and tack weld aluminum tube 3 1 3 0.050
+TIG weld aluminum tube 8 1 8 0.133
+Deburr All edges and holes 2 4 8 0.133
+Clean and inspect welds 2 3 6 0.100
+Total Time [Hr]: 1.183
+ 
+Assuming a labor cost of $15/hr and 1.183 hours to complete, the estimated cost of manufacturing for the 
+left reel mount is $17.75. 
+Table 9.1.5: Carriage Manufacturing Process
+Manufacturing Process 
+Est. Time 
+[Min] 
+QTY 
+Total Time 
+[Min] 
+Total Time [Hr] 
+Cut stock to 35×25×45 mm 5 1 5 0.0833
+Face mill all sides to final dims 15 1 15 0.25
+Drill Ø3.62 mm THRU main hole (center at 19.53 
+mm height) 
+5 1 5 0.0833 
+Tap main hole M×X thread (if required) 5 1 5 0.0833
+
+64 
+Drill Ø2.10 mm THRU (6.00 mm from left, 1.67 
+mm from bottom) 
+5 1 5 0.0833 
+Mill R1.00 radii (6 places) & R2.00 (2 places) 10 1 10 0.1667
+Mill top slot (12 mm wide, 8 mm deep, 4 mm 
+offset) 
+10 1 10 0.1667 
+Deburr all edges 5 1 5 0.0833
+Final dimensional inspection (27.53 mm height; 
+all hole positions) 
+10 1 10 0.1667 
+Total Time [Hr]: 1.77
+ 
+Assuming a labor cost of $15/hr and 1.77 hours to complete, the estimated cost of manufacturing for the 
+carriage is $26.55. 
+Table 9.1.6: Bidirectional Threaded Rod Manufacturing Process
+Manufacturing Process 
+Est. Time 
+[Min] 
+QTY 
+Total Time 
+[Min] 
+Total Time [Hr] 
+Mark and cut 8 mm diameter aluminum rod to X 
+mm on a band saw to 160 mm 
+4 1 4 0.0667
+Load part into CNC lathe collet and center 10 1 10 0.1667
+Face left and right ends to proper length 5 1 5 0.0833
+Use a center drill for support during threading 5 1 5 0.0833
+Turn the smaller diameter on non-key side 10 1 10 0.1667
+Turn and finish smaller diameter on key side 10 1 10 0.1667
+Turn and finish the small notch on key side 3 1 3 0.0500
+Adjust spindle speed and depth per pass 5 1 5 0.0833
+Cut the left hand thread for entire thread length 
+(multiple passes) 
+10 1 10 0.1667
+Cut the right hand thread for entire thread length 
+(multiple passes) 
+10 1 10 0.1667
+Remove part from CNC lathe 4 1 4 0.0667
+Insert part into CNC mill and center it 5 1 5 0.0833
+Insert correct drill into CNC mill 5 1 5 0.0833
+Drill keyhole into top side of part 15 1 15 0.2500
+Remove part from CNC mill 5 1 5 0.0833
+
+65 
+Measure threads to ensure correct pitch with 
+thread gauge 
+5 1 5 0.0833
+Check diameters with calipers 3 1 3 0.0500
+Check total length with calipers 3 1 3 0.0500
+Polish threads 5 1 5 0.0833
+Deburr notches 5 1 5 0.0833
+Clean part 5 1 5 0.0833
+Total Time [Hr]: 2.20
+Assuming a labor cost of $15/hr and 2.20 hours to complete, the estimated cost of manufacturing for the 
+bidirectional threaded rod is $33.00. 
+Table 9.1.7: Bearing Mount Manufacturing Process
+Manufacturing Process 
+Est. Time 
+[Min] 
+QTY 
+Total Time 
+[Min] 
+Total Time [Hr] 
+Cut stock to ~30×22 mm 5 1 5 0.0833
+Face mill all sides to 27.98×20.27 10 1 10 0.1667
+Datum setup (bottom & left edges) 2 1 2 0.0333
+Spot hole centers (4.17 mm & 5.16 mm offsets; 
+18.81 mm spacing) 
+5 1 5 0.0833 
+Drill Ø2.5 mm THRU (2 places) 5 1 5 0.0833
+Tap M3 × 0.5 THRU (2 places) 5 1 5 0.0833
+Deburr all edges 3 1 3 0.05
+Final inspection (length 27.98 mm, spacing 18.81 
+mm) 
+5 1 5 0.0833 
+Total Time [Hr]: 0.67
+ 
+Assuming a labor cost of $15/hr and 0.67 hours to complete, the estimated cost of manufacturing for the 
+bearing mount is $10.05. 
+Table 9.1.8: Drive Gear Manufacturing Process
+Manufacturing Process 
+Est. Time 
+[Min] 
+QTY 
+Total Time 
+[Min] 
+Total Time [Hr] 
+
+66 
+Waterjet cut 20 mm diameter gear blank 15 1 15 0.25
+CNC bore 8 mm diameter thru hole 15 1 15 0.25
+CNC mill 8 teeth on gear blank 20 1 20 0.3333
+Deburr sharp edges 10 1 15 0.1667
+Total Time [Hr]: 1.0
+ 
+Assuming a labor cost of $15/hr and 1.0 hours to complete, the estimated cost of manufacturing for the 
+drive gear is $15.00. 
+Table 9.1.9: Tether Attachment Mount Manufacturing Process
+Manufacturing Process 
+Est. Time 
+[Min] 
+QTY 
+Total Time 
+[Min] 
+Total Time [Hr] 
+Bandsaw cut raw stock for plates 3 4 12 0.2
+Face Mill the top and bottom of all plates 5 4 20 0.333
+Mill edges of all plates to the final size 6 4 24 0.4
+Drill holes in the bottom plate 4 1 4 0.067
+Drill hole in back plate 1 1 1 0.0167
+Waterjet cut triangular profile of side plates 5 2 10 0.167
+Deburr All edges and holes 2 4 8 0.133
+Position and tack weld back and side plates to 
+bottom plate at 90 degrees 
+3 3 9 0.15
+Full TIG weld the back and side plates to the 
+bottom plate 
+4 3 12 0.2
+Clean and inspect welds 2 3 6 0.1
+Total Time [Hr]: 1.77
+Assuming a labor cost of $15/hr and 1.77 hours to complete, the estimated cost of manufacturing for the 
+tether attachment mount is $26.55. 
+Table 9.1.10: Top Clamp Block Manufacturing Process
+Manufacturing Process 
+Est. Time 
+[Min] 
+QTY 
+Total Time 
+[Min] 
+Total Time [Hr] 
+Bandsaw cut raw stock for block 3 1 3 0.050
+
+67 
+Mill top and bottom surfaces 6 1 6 0.1
+Mill edges to final dimensions 8 1 8 0.133
+Mill top recess pocket to depth 6 1 6 0.1
+Check to make sure pocket radius is accurate 5 1 5 0.083
+Drill 3.3 mm diameter THRU holes 6 3 8 0.133
+Counterbore mounting holes 3 3 6 0.1
+Chamfer all edges 2 1 2 0.033
+Deburr all edges and holes 4 1 4 0.067
+Light surface finish pass on all faces 6 1 6 0.1
+Clean part and remove chips/oil 3 1 3 0.05
+Final Part inspection (holes, edges, dimensions) 5 1 5 0.083
+Total Time [Hr]: 1.20
+Assuming a labor cost of $15/hr and 1.20 hours to complete, the estimated cost of manufacturing for the 
+top clamp block is $18.00. 
+Table 9.1.11: Bottom Clamp Block Manufacturing Process
+Manufacturing Process 
+Est. Time 
+[Min] 
+QTY 
+Total Time 
+[Min] 
+Total Time [Hr] 
+Bandsaw cut raw stock for block 4 1 4 0.067
+Mill top and bottom surfaces 6 1 6 0.1
+Mill all edges to final dimensions 10 1 10 0.167
+Mill 7.5 mm stepped profile on block 8 1 8 0.133
+Endmill internal slot grooves 8 1 8 0.133
+Drill 2.5 mm diameter THRU hole 4 3 4 0.067
+Tap all THRU hole (M3 X 0.5) 6 3 6 0.1
+Drill hole (M8 X 1.25) through the back of the 
+block 11.003 mm in 
+4 1 4 0.067
+Deburr All edges and holes 6 1 6 0.1
+Chamfer noted edges 3 1 3 0.05
+Light surface finish pass on all faces 6 1 6 0.1
+Clean part and removes chips/oil 3 1 3 0.05
+
+68 
+Final Part inspection (holes, edges, dimensions) 8 1 8 0.133
+Total Time [Hr]: 1.50
+ 
+Assuming a labor cost of $15/hr and 1.50 hours to complete, the estimated cost of manufacturing for the 
+bottom clamp block is $22.50. 
+Table 9.1.12 below details the processes required to assemble each subassembly of the design from the 
+manufactured custom parts and OTS parts, and the total time each process takes. The total time to assemble 
+the entire product is included at the bottom of the table. 
+Table 9.1.12: Assembly Process Table
+Assembly Process Est. Time [Min] Total Time [Hr]
+3U Frame Assembly
+Screw baseplate into side plates with 4 M3 screws 15 0.25
+Screw top rods to side plates with 4 M3 screws 10 0.17
+Torque frame screws to spec 5 0.083
+Reel Subsystem
+Mount motor to right reel mount with 4 screws 15 0.25
+Install spool onto mounts with ball bearing and M5 screw 20 0.33
+Attach micro servo lock to left reel mount with 2 M2 bolts 10 0.17
+Secure tether wire to spool via radial hole and wrap around M5 screw 15 0.25
+Align and mesh motor shaft with spool gear 10 0.17
+Level Wind Subsystem
+Mount threaded rod and smooth rod with bearings to 3U frame 20 0.33
+Install carriage on rods and ensure smooth travel 15 0.25
+Attach drive gear and secure with alignment key and E-clip 10 0.17
+1U Frame Assembly
+Screw baseplate into side plates with 4 M3 screws 15 0.25
+Screw top rods to side plates with 4 M3 screws 10 0.17
+Torque frame screws to spec 5 0.083
+Tether Attachment Subsystem
+Fasten triangular mount to 1U frame with 4 M3 bolts 10 0.17
+Install load cell and clamp blocks, feed tether, tighten screws 20 0.33
+
+69 
+Electron Emitter Subsystem
+Mount electron emitter and xenon tank with respective mounts 15 0.25
+Connect gas tube and wiring to onboard computer 20 0.33
+Total Time [Hr]: 4.006
+Assuming a labor cost of $15/hr and 4.006 hours to complete, the estimated cost of assembly is $60.00. 
+
+70 
+9.2 Cost Model 
+Table 9.2.1 outlines the estimated manufacturing costs for each custom component of the tether satellite 
+assembly. It includes the primary processes required, the time allocated for each operation, and the 
+associated labor and tooling costs. These figures provide insight into the complexity and resource 
+requirements for producing the mechanical parts of the system. 
+Table 9.2.1: Manufacturing Process Cost Table
+Component Processes Time (hrs) Cost ($)
+Spool Lathe Turning, CNC 
+Milling, Welding 
+4.75 $71.25 
+Frame Cap (x4) Bandsaw, CNC Milling, 
+Hand Deburr 
+1.57 $23.55 
+Right Reel Mount Waterjet/Profiling, 
+Bending, CNC Drilling 
+1.50 $22.50 
+Left Reel Mount Laser Cut, Bending, TIG 
+Welding 
+1.18 $17.75 
+Level Wind Double 
+Threaded Rod 
+CNC Lathe, Thread 
+Cutting, Milling 
+2.20 $33.00 
+Level Wind Carriage CNC Milling, Drilling, 
+Inspection 
+1.77 $26.55 
+Bearing Mount CNC Milling, 
+Drilling/Tapping, 
+Inspection 
+0.67
+$10.05 
+Drive Gear Waterjet, CNC Boring, 
+Gear Milling 
+1.00 $15.00 
+Tether Attachment 
+Mount 
+CNC Milling, Waterjet, 
+TIG Welding 
+1.77 $26.55 
+Top Clamp Block CNC Milling, Drilling, 
+Finishing 
+1.20 $18.00 
+Bottom Clamp Block CNC Milling, Drilling, 
+Tapping 
+1.50 $22.50 
+Totals - 19.11 $286.70
+ 
+Table 9.2.2 details the labor and time required to integrate all subsystems into the final tether satellite 
+structure. Each step, from frame assembly to subsystem integration, is listed with its corresponding time and 
+
+71 
+cost, ensuring transparency in the assembly workflow and highlighting areas where efficiency improvements 
+may be possible. 
+Table 9.2.2: Assembly Process Cost Table
+Assembly Process Time (hrs) Cost ($)
+3U Frame Assembly
+Screw baseplate into side plates with 4 M3 screws 0.25 $3.75
+Screw top rods to side plates with 4 M3 screws 0.17 $2.55
+Torque frame screws to spec 0.083 $1.25
+Reel Subsystem
+Mount motor to right reel mount with 4 screws 0.25 $3.75
+Install spool onto mounts with ball bearing and M5 screw 0.33 $4.95
+Attach micro servo lock to left reel mount with 2 M2 bolts 0.17 $2.55
+Secure tether wire to spool via radial hole and wrap around M5 screw 0.25 $3.75
+Align and mesh motor shaft with spool gear 0.17 $2.55
+Level Wind Subsystem
+Mount threaded rod and smooth rod with bearings to 3U frame 0.33 $4.95
+Install carriage on rods and ensure smooth travel 0.25 $3.75
+Attach drive gear and secure with alignment key and E-clip 0.17 $2.55
+1U Frame Assembly
+Screw baseplate into side plates with 4 M3 screws 0.25 $3.75
+Screw top rods to side plates with 4 M3 screws 0.17 $2.55
+Torque frame screws to spec 0.083 $1.25
+Tether Attachment Subsystem
+Fasten triangular mount to 1U frame with 4 M3 bolts 0.17 $2.55
+Install load cell and clamp blocks, feed tether, tighten screws 0.33 $4.95
+Electron Emitter Subsystem
+Mount electron emitter and xenon tank with respective mounts 0.25 $3.75
+Connect gas tube and wiring to onboard computer 0.33 $4.95
+Totals 4.006 $60.09
+
+72 
+Table 9.2.3 summarizes the material costs for all custom-fabricated parts. It accounts for the raw material 
+expenses associated with components such as the spool, reel mounts, and tether mounting blocks. These 
+costs are critical for understanding the baseline material investment before machining and assembly. 
+Table 9.2.3: Custom Parts Material Cost Table
+Part Quantity Material Cost
+Spool 1 $4.40 
+End Gear 1 $1.76
+End Cap 1 $1.60
+Right Reel Mount/Motor Mount 1 $5.31 
+Left Reel Mount/Lock Mount 1 $5.72 
+Threaded Rod 1 $3.09
+Bearing Mounts 2 $0.44
+Carriage 1 $0.35 
+Gear 1 $0.19 
+End Pieces 4 $3.11
+Tether Mounting Block Base 1 $1.69 
+Tether Mounting Block Lid 1 $0.39 
+Load Cell Mount 1 $2.38 
+Servo Motor Arm 1 $0.29 
+Totals 18 $30.72
+Table 9.2.4 captures the expenses for commercially sourced components, including specialized hardware 
+like the electron emitter and xenon tank, as well as standard fasteners and bearings. These items represent a 
+significant portion of the overall budget due to the inclusion of high-value subsystems. 
+
+73 
+Table 9.2.4: OTS Parts Cost Table
+Part Quantity Total Cost
+In-Line Load Cell 1 $172.49
+Motor 1 $36.55
+Reel Bearing 1 $32.26
+Tether 1 $101.14
+Level Wind Bearing 2 $55.20
+Carriage Rod 1 $18.48
+Frame Bars 8 $3.30
+Large Frame Plates 2 $12.12
+Small Frame Plate 1 $3.03
+Servo Motor 1 $5.00
+Electron Emitter 1 $7,500.00
+Xenon Tank/mount 1 $3,200.00
+Onboard Microcontroller 2 $70.00
+M6 Lock nut (load cell) 1 $2.33
+M3 x 8mm Screw 33 $4.22
+M5 x 8mm Screw 1 $0.13
+M3 Lock Nut 8 $0.33
+M2 x 8mm Screw 2 $0.38
+M2 Lock Nut 2 $1.52
+Totals 70 $11,218.42
+Combining all categories, manufacturing cost ($286.70), assembly cost ($60.09), both with energy-use 
+included in the $15/hr, custom materials cost ($30.72), and OTS parts cost ($11,218.42) - the total estimated 
+cost for the tether satellite assembly is $11,595.93. This figure reflects both the complexity of the design and 
+the reliance on specialized components, with the electron emitter and xenon tank contributing substantially 
+to the overall expense. 
+
+74 
+10 Discussion and Conclusion 
+The final design satisfies the majority of the Product Design Specifications established during the define 
+phase. All dimensional and mass requirements were met, with the assembly fitting within the designated 
+CubeSat envelope and remaining below the allowable system weight. Structural requirements were achieved 
+through the selection of aluminum 5056 for the tether and 6061-T6 for the mounting components, both of 
+which provide sufficient strength, stiffness, and environmental durability for a six-month mission in low Earth 
+orbit. The tether system meets the specified minimum factor of safety in tension, and the overall geometry of 
+the structure analytically withstands launch and tether loads. 
+Performance specifications were also met. The chosen stepper motor exceeded initial power 
+requirements, but an agreement was reached with the requirement to allocate enough power to allow the 
+function of the design. Preliminary thermal analysis indicates that heat generation remains within acceptable 
+bounds. The constant-tension requirement was addressed through the selected drive configuration; while full 
+validation would require further testing, analytical results indicate achievement of tether and reel subsystem 
+PDS criteria. Aesthetics and manufacturability goals were supported by using simple planar components, 
+standard welds, and a minimal number of custom parts. 
+Usability and installation requirements were satisfied by keeping the assembly straightforward to 
+manufacture and assemble, with fasteners and welds positioned for clear access. Environmental 
+requirements, including microgravity survivability, vacuum compatibility, and material behavior under thermal 
+cycling, were met through appropriate material selection and the use of space-rated coating and insulation 
+strategies. 
+A few specifications remain partially validated rather than fully demonstrated. Electrical insulation 
+performance and long-term wear of the tether coating would benefit from extended testing. Similarly, the 
+bending behavior of the tether around the guide features is analytically acceptable but would require physical 
+testing to fully confirm long-term use. These limitations do not represent failures to meet the PDS but rather 
+areas where experimental verification was outside the scope of the project. Overall, the design meets all 
+essential PDS criteria, with further testing required to fully validate some structural, vibrational, and thermal 
+claims. 
+
+75 
+11 References 
+[1] MatWeb, “Material Property Data: Aluminum 5056-H18 (UNS A95056),” MatWeb – The Online Materials 
+Information Resource 
+[2] Fuller Fasteners, “Steels for Screws, Bolts and Studs — Steels Generally Used for Metric Screws, Bolts 
+and Studs,” Fuller Fasteners
+[3] NASA, Tethered Satellite System (TSS-1 and TSS-1R) Mission Reports, NASA SP-1998-TSS, Washington, 
+DC, 1998. 
+[4] Stone, N. H., and Bonifazi, C., “The Small Expendable Deployment System (SEDS),” NASA Technical 
+Memorandum TM-108493, NASA Marshall Space Flight Center, Huntsville, AL, 1993. 
+[5] European Space Agency, YES2 Mission Overview and Deployment Results, ESA SP-1298, Noordwijk, The 
+Netherlands, 2007. 
+[6] Sanmartin, J. R., Lorenzini, E. C., and Martinez-Sanchez, M., “Electrodynamic Tether Applications and 
+Concepts,” NASA Marshall Space Flight Center, Huntsville, AL, 1996. 
+[7] Janhunen, P., “Electrostatic Plasma Brake for Satellite Deorbiting,” Journal of Aerospace Engineering, Vol. 
+27, No. 1, 2014, pp. 1–12. 
+https://doi.org/10.1061/(ASCE)AS.1943-5525.0000316 
+[8] NASA, Outgassing Data for Selecting Spacecraft Materials, NASA Reference Publication RP-1124, 
+Washington, DC, 1998. 
+[9] NASA Goddard Space Flight Center, General Environmental Verification Standard (GEVS), GSFC-STD7000, Greenbelt, MD, 2013. 
+[10] California Polytechnic State University, CubeSat Design Specification, Rev. 13, San Luis Obispo, CA, 
+2020. 
+[11] Williams, T., “Dynamics of Tethered Satellite Systems for Artificial Gravity Simulations,” Acta 
+Astronautica, Vol. 115, 2015, pp. 1–12. 
+https://doi.org/10.1016/j.actaastro.2015.05.012 
+[12] NASA Glenn Research Center, Hollow Cathode Plasma Contactor Development, NASA TM-106824, 
+Cleveland, OH, 1994. 
+[13] Johnson, L., Young, R., and Montgomery, S., “Electrodynamic Tether Propulsion: Realizing Space 
+Transportation Using Space Plasma,” Acta Astronautica, Vol. 52, No. 2, 2003, pp. 113–120. 
+[14] Estes, R. D., “Spacecraft Charging in Low Earth Orbit,” Journal of Spacecraft and Rockets, Vol. 39, No. 2, 
+2002, pp. 257–264. 
+[15] Sanmartin, J. R., “Bare Tethers for Electrodynamic Applications,” Journal of Applied Physics, Vol. 83, No. 
+8, 1998, pp. 4509–4516. 
+[16] Bouwmeester, J., and Guo, J., “Survey of Worldwide CubeSat Missions, Orbit Uses, and Technical 
+Achievements,” Acta Astronautica, Vol. 67, No. 7–8, 2010, pp. 854–862. 
+[17] Swartwout, M., “CubeSats and Mission Success: 2000–2016,” Small Satellite Conference, SSC16-VII-03, 
+Logan, UT, 2016. 
+
+76 
+[18] Leger, L. J., “Materials for Satellites in Low-Earth Orbit,” Journal of Spacecraft and Rockets, Vol. 33, No. 
+3, 1996, pp. 380–387. 
+[19] de Groh, K. K., Banks, B. A., and Berger, L. I., “Degradation of Spacecraft Materials in Low Earth Orbit,” 
+Acta Astronautica, Vol. 52, No. 2, 2003, pp. 587–596. 
+[20] Wertz, J. R., and Larson, W. J. (eds.), Space Mission Analysis and Design, 3rd ed., Microcosm Press, El 
+Segundo, CA, 1999. 
+[21] Childs, P. R. N., Rotating Machinery: Design and Analysis, Butterworth-Heinemann, Oxford, 2018. 
+[22] Peterson, R. E., Stress Concentration Factors, 2nd ed., Wiley, New York, 2008. 
+[23] Budynas, R. G., and Nisbett, J. K., Shigley’s Mechanical Engineering Design, 10th ed., McGraw–Hill, New 
+York, 2015. 
+[24] “Aluminum 5056 Alloy Data Sheet,” ASM Handbook: Aluminum and Aluminum Alloys, ASM International, 
+2010. 
+[25] Herring, H. L., “Fatigue of Aluminum Alloys in Space Environments,” NASA Technical Report TM-2005-
+213597, 2005. 
+[26] Banks, B. A., de Groh, K. K., and Miller, S. K., “Evaluation of Teflon and FEP as Protective Coatings for 
+Spacecraft,” NASA TM-107930, 1997. 
+[27] Patterson, M. J., “Performance of Hollow Cathode Plasma Contactors,” Journal of Propulsion and Power, 
+Vol. 14, No. 1, 1998, pp. 39–45. 
+[28] Domonkos, M. T., “Evaluation of Low-Current Hollow Cathodes for Space Applications,” NASA/CR-2000-
+209191, 2000. 
+[29] Lappas, V., Adeli, N., et al., “Tethered Satellite Deployment Mechanisms for Formation Flying,” Acta 
+Astronautica, Vol. 72, 2012, pp. 27–36. 
+[30] Odom, J., and Johnson, L., “Dynamics of a Rotating Two-Body Satellite Tether System,” AIAA Guidance, 
+Navigation, and Control Conference, AIAA Paper 2003-5587, 2003.
+
+12 Appendices 
+12.1 Assembly Drawings 
+
+78 
+
+79 
+
+80 
+
+81 
+
+82 
+
+83 
+
+84 
+
+85 
+
+86 
+
+87 
+
+88 
+
+89 
+
+90 
+
+12.2 Part Drawings 
+
+92 
+
+93 
+
+94 
+
+95 
+
+96 
+
+97 
+
+98 
+
+99 4
+
+100 
+
+101 
+
+102 
+
+12.3 Functional Surfaces 
+The following descriptions (Table 12.3.1) lists out critical surfaces within the assembly. It includes any 
+surface that slides, rolls, rotates, or contacts another part within the system. The idea was to essentially 
+highlight where any mechanical interaction happens which would help to identify any surfaces that may 
+need a smooth finish, lubrication, or durability considerations. Not all surfaces in the system were 
+deemed critical. 
+Table 12.3.1: Functional Surfaces 
+Part Number Description Functional Surface
+R-002 Tether Spool Rolling (tether wind/unwind)
+L-001 Level-Wind Carriage Sliding (linear rail interface)
+T-CW-OTS-002 Tether Sliding (against roller)
+T-MC-OTS-001 Load Cell Contact (grips)
+F-MC-OTS-004 Frame Mounting Bolts (M3 X 0.5 
+Class 12.9) 
+Contact (bolt head surfaces)
+F-001 Frame Caps Contact (bolts and frame rods)
+L-004 Level-Wind Gear Contact (spool gear)
+F-MC-OTS-001 Frame Rods Contact (bolts)
+L-MC-OTS-001 Alignment Rod Sliding, Contact (level-wind 
+carriage) 
+
+104 
+12.4 Electrical/Wiring Diagrams 
+The electrical system as shown in Figure 12.4.1 displays all of the electronic components in the tether 
+deployment system with their required amplifiers, controllers, and power boards and how they will be wired to 
+each other. The right side which has the power board, microcontroller, servo, stepper motor and controller is 
+all housed in the 3U mother satellite. The rest of the components on the left are in the 1U daughter satellite. 
+All of the electronics will be powered from an external power source from the larger 12U satellites supplied to 
+the power boards within each side. All electronics will be mounted to the frame of their respective satellites to 
+allow for proper grounding and discharging of any static charge. The frame has aluminum sheets attached on 
+all outer facing sides reducing the need for individual electronics housings. 
+Figure 12.4.1: Complete Wiring Diagram of Tether System 
